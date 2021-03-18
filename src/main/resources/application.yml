@@ -1,0 +1,19 @@
+server:
+  port: 8082
+spring:
+  jpa:
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: 1234
+  thymeleaf:
+    cache: false
+  devtools:
+    livereload:
+      enabled: true

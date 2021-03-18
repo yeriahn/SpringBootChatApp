@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div th:fragment="fragment-header" class="headers">
+    <header class="in-headers">
+        <div>
+            <table>
+                <tr th:each="member : ${members}">
+                    <td th:text="|${member.getMemberId()}님, 환영합니다!|"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="header-logout" id="navbarSupportedContent">
+            <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+                <button class="btn btn-secondary my-2 my-sm-0" sec:authorize="isAuthenticated()" type="submit">Logout</button>
+            </form>
+        </div>
+    </header>
+</div>
+</html>

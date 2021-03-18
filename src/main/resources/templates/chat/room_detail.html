@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Chatting</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/main.js" defer></script>
+</head>
+
+<body>
+
+<div th:replace="/fragments/header.html :: fragment-header"></div>
+
+<section class="sections">
+    <section class="lists">
+        <div class="listTop">
+            <div class="listCnt">
+                <button class="userCntBtn">
+                    <img src="/img/user_icon.png" class="iconUserCnt"/>
+                </button>
+                <strong id="chatTotalCnt">1</strong>
+                <span class="txt_personCnt">명</span>
+            </div>
+            <div class="listOut">
+                <button class="btn userOutBtn">
+                    <img src="/img/out.png" class="iconOut"/>
+                </button>
+            </div>
+        </div>
+        <div class="listRoomName">
+            <h4 class="listNameItem">채팅방 이름</h4>
+        </div>
+        <div class="listMessageGroup">
+            <ul class="listSelectGroup">
+                <li class="listGroupItem">
+                    메시지
+                </li>
+            </ul>
+        </div>
+        <div class="listMessageForm">
+            <div class="listInputMessageWrap">
+                <textarea class="listPushArea"></textarea>
+            </div>
+            <div class="listSendMessageWrap">
+                <button class="colorBtn blue listSendButton" data-key="color" data-value="pink">
+                    입력
+                </button>
+            </div>
+        </div>
+    </section>
+</section>
+
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+:root {
+    /* color */
+    --color-black: #3f454d;
+    --color-white: #ffffff;
+    --color-green: #a0d468;
+    --color-purple: #ac92ec;
+    --color-mint: #48cfad;
+    --color-blue: #3b88c3;
+    --color-yellow: #fbbe28;
+    --color-pink: #fd7f84;
+    --color-light-grey: #dfdfdf;
+    --color-dark-grey: #808080;
+    --color-ivory-color: #dadafc;
+    --color-light-red: #e5c1c5;
+    --color-light-navy: #6eceda;
+    --color-dark-ivory: #b57fb3;
+
+    /* size */
+    --base-space: 8px;
+    --base-hundred: 100px;
+    --size-button: 60px;
+    --size-border: 4px;
+    --size-thumbnail: 50px;
+    --font-size: 18px;
+    --border-size : 1px;
+
+    /* animation */
+    --animation-duration: 300ms;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-light-red);
+}
+
+.headers {
+    height: 10vh;
+}
+
+.in-headers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-white);
+}
+
+.sections {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: var(--base-hundred);
+    height: var(--base-hundred);
+    padding-bottom: var(--base-space);
+    cursor: pointer;
+    transition: transform var(--animation-duration) ease;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+.btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: transform var(--animation-duration) ease;
+    margin-right: var(--base-space);
+}
+
+.btn:hover,
+.logo:hover {
+    transform: scale(1.1);
+}
+
+.buttons {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.imgBtn {
+    width: var(--size-button);
+    height: var(--size-button);
+}
+
+.colorBtn {
+    font-size: var(--font-size);
+    padding: calc(var(--base-space) * 2);
+    border-radius: var(--size-border);
+    background-color: var(--color-ivory-color);
+}
+
+.colorBtn:hover {
+    background-color: var(--color-dark-ivory);
+}
+
+.modalSendBtn{
+    font-size: 16px;
+    background-color: var(--color-ivory-color);
+    border-radius: var(--size-border);
+    height: 35px;
+}
+
+.items {
+    width: 60%;
+    height: 60%;
+    list-style: none;
+    padding-left: 0;
+    overflow-y: auto;
+}
+
+.item {
+    background-color: var(--color-white);
+    display: flex;
+    align-items: center;
+    padding: var(--base-space);
+    margin-bottom: var(--base-space);
+}
+
+.item__thumbnail {
+    width: var(--size-thumbnail);
+    height: var(--size-thumbnail);
+}
+
+.item__description {
+    margin-left: var(--base-space);
+    font-size: var(--font-size);
+}
+
+.lists {
+    background-color: var(--color-white);
+    width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.listTop {
+    height: 8%;
+    background-color: var(--color-ivory-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--border-size) solid var(--color-light-grey);
+}
+
+.userCntBtn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 33px;
+    height: 100%;
+}
+
+.iconUserCnt {
+    width: 18px;
+    height: 16px;
+    margin-left: 10px;
+    padding-right: 0px;
+}
+
+.userOutBtn {
+    width: 33px;
+    height: 100%;
+}
+
+.iconOut {
+    width: 18px;
+    height: 16px;
+}
+
+.listRoomName {
+    height: 8%;
+    display: flex;
+    justify-content : center;
+    align-items: center;
+    border-bottom: var(--border-size) solid var(--color-light-grey);
+}
+
+.listMessageGroup {
+    height: 85%;
+}
+
+.listMessageForm {
+    display: flex;
+    align-items: flex-end;
+    background-color: var(--color-white);
+    height: 15%;
+}
+
+.listInputMessageWrap {
+    height: 100%;
+    width: 90%;
+}
+
+.listPushArea {
+    border: 0px;
+    height: 100%;
+    width: 100%;
+    resize: none;
+    overflow-y: auto;
+    font-size: calc(var(--base-space) - 4 );
+    border-top: var(--border-size) solid var(--color-light-grey);
+}
+
+.listSendMessageWrap {
+    height: 100%;
+    width: 10%;
+}
+
+.listSendButton {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    background: white;
+    padding: 24px 16px;
+    border-radius: 4px;
+    width: 500px;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.modal p {
+    font-size: 16px;
+}
+
+.close-wrapper {
+    text-align: right;
+}
+
+.modalInput {
+    margin-right: 15px;
+    height: 30px;
+    width: 200px;
+}
+
+.input-group-prepend {
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Chatting</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/main.js" defer></script>
+</head>
+
+<body>
+
+<div th:replace="/fragments/header.html :: fragment-header"></div>
+
+<section class="sections">
+    <!--Logo-->
+    <img src="/img/logo.png" alt="Logo" class="logo" />
+
+    <!--Buttons-->
+    <section class="buttons">
+        <section class="button-group-prepend">
+            <button class="btn colorBtn" data-key="type" data-value="tshirt">
+                수다
+            </button>
+            <button class="btn colorBtn" data-key="type" data-value="pants">
+                게임
+            </button>
+            <button class="btn colorBtn" data-key="type" data-value="skirt">
+                공부
+            </button>
+            <button class="btn colorBtn" data-key="color" data-value="blue">
+                애니
+            </button>
+            <button class="btn colorBtn" data-key="color" data-value="yellow">
+                모임
+            </button>
+            <button class="btn colorBtn" data-key="color" data-value="pink">
+                쇼핑
+            </button>
+        </section>
+        <section>
+            <button id="open" class="btn colorBtn" data-key="color">
+                채팅방 생성
+            </button>
+        </section>
+    </section>
+
+    <div class="modal-wrapper" style="display: none;">
+        <div class="modal">
+            <div class="modal-title">채팅방 생성</div>
+            <form id="roomCreateForm">
+                <div class="input-group-prepend">
+                        <input type="text" class="modalInput" placeholder="채팅방 이름을 입력하세요.">
+                        <div class="input-group-append">
+                            <button class="btn modalSendBtn" type="button">생성</button>
+                        </div>
+                </div>
+            </form>
+            <div class="close-wrapper">
+                <button id="close" class="btn modalCloseBtn">Close</button>
+            </div>
+        </div>
+    </div>
+    <!--Items-->
+    <ul class="items"></ul>
+</section>
+
+</body>
+</html>
