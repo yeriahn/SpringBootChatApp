@@ -1,4 +1,4 @@
-package com.noti.chatapp.config;
+package com.noti.chatapp.config.security;
 
 import com.noti.chatapp.security.handler.CustomAccessDeniedHandler;
 import com.noti.chatapp.security.handler.CustomFailureHandler;
