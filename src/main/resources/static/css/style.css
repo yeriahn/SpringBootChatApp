@@ -32,6 +32,22 @@
     box-sizing: border-box;
 }
 
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+
 body {
     height: 100vh;
     margin: 0;
@@ -106,7 +122,7 @@ body {
     background-color: var(--color-dark-ivory);
 }
 
-.modalSendBtn{
+.modal-send-btn{
     font-size: 16px;
     background-color: var(--color-ivory-color);
     border-radius: var(--size-border);
@@ -263,7 +279,7 @@ body {
     text-align: right;
 }
 
-.modalInput {
+.modal-input {
     margin-right: 15px;
     height: 30px;
     width: 200px;

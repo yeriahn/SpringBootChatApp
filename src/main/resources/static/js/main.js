@@ -1,8 +1,7 @@
 // json파일로부터 데이터 받아오기
 function loadItems() {
-    return fetch('/js/data.json')
+    return fetch('/api/chat/chat-room')
         .then((response) => response.json()) //받아온 데이터가 성공적이면 json으로 변환
-        .then((json) => json.items); //json 안에 있는 item들을 리턴
 }
 
 function displayItems(items) {
@@ -14,8 +13,7 @@ function displayItems(items) {
 function createHTMLString(item) {
     return `
     <li class="item">
-        <img src="${item.image}" alt="${item.type}" class="item__thumbnail" />
-        <span class="item__description">${item.gender}, ${item.size}</span>
+        <span class="item__description">${item.id}, ${item.name}</span>
     </li>
     `;
 }
@@ -49,20 +47,3 @@ loadItems()
     })
     .catch(console.log);
 
-const open = document.getElementById("open");
-const close = document.getElementById("close");
-const modal = document.querySelector(".modal-wrapper");
-open.onclick = () => {
-    modal.style.display = "flex";
-};
-close.onclick = () => {
-    modal.style.display = "none";
-};
-
-function roomCreateSubmit(event) {
-    event.submit();
-    event.preventDefault();
-}
-
-const roomCreateForm = document.getElementById('roomCreateForm');
-roomCreateForm.addEventListener('submit', roomCreateSubmit);
