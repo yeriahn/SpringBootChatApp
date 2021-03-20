@@ -14,6 +14,7 @@ public class ChatRoomDto {
 
     private Long id;
     private String name;
+    private String category;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDate;
@@ -22,13 +23,15 @@ public class ChatRoomDto {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public ChatRoomDto(String name) {
+    public ChatRoomDto(String name,String category) {
         this.name = name;
+        this.category = category;
     }
 
     public ChatRoomDto(ChatRoom chatRoom) {
         this.id = chatRoom.getId();
         this.name = chatRoom.getName();
+        this.category = chatRoom.getCategory();
         this.createdDate = chatRoom.getCreatedDate();
         this.modifiedDate = chatRoom.getModifiedDate();
     }
@@ -37,6 +40,7 @@ public class ChatRoomDto {
     public ChatRoom toEntity() {
         return ChatRoom.builder()
                 .name(name)
+                .category(category)
                 .build();
     }
 }

@@ -16,13 +16,20 @@ const Room = (function () {
             if(Commons.isNotEmpty(data)) {
                 const container = document.querySelector('.items');
                 container.innerHTML = data.map((item) => createHTMLString(item)).join('');
+            }else {
+                container.innerHTML = `
+                    <li class="item">
+                        <span class="item__description">채팅방이 존재하지 않습니다.</span>
+                    </li>
+                    `;
             }
         })
     };
 
     const createRoom = function () {
         const roomName = document.getElementById('room-name').value;
-        const params = {name: roomName};
+        const roomCategory = document.getElementById('room-category').value;
+        const params = {name: roomName, category: roomCategory};
         Commons.ajaxPost("/api/chat/chat-room", params, function(resp) {
             getListRenderAll();
         });
@@ -45,7 +52,7 @@ const Room = (function () {
 function createHTMLString(item) {
     return `
     <li class="item">
-        <span class="item__description"><a href="/chat/room/detail/"+${item.id}">${item.id} 번방 : ${item.name}</a></span>
+        <span class="item__description"><a href="/chat/room/detail/"+${item.id}">${item.name}</a></span>
     </li>
     `;
 }
