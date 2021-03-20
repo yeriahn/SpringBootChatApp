@@ -1,4 +1,4 @@
-// json파일로부터 데이터 받아오기
+/*// json파일로부터 데이터 받아오기
 function loadItems() {
     return fetch('/api/chat/chat-room')
         .then((response) => response.json()) //받아온 데이터가 성공적이면 json으로 변환
@@ -45,5 +45,5 @@ loadItems()
         displayItems(items);
         setEventListeners(items);
     })
-    .catch(console.log);
+    .catch(console.log);*/
 

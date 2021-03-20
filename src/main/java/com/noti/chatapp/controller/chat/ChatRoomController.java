@@ -32,7 +32,7 @@ public class ChatRoomController {
         model.put("members", members);
         model.put("currentMemberId", user.getUsername()); //로그인을 통해 인증된 유저 정보 저장
 
-        return "chat/room";
+        return "/chat/room";
     }
 
     //채팅방 입장 화면
@@ -41,13 +41,19 @@ public class ChatRoomController {
         return "chat/room_detail";
     }
 
+    //채팅방 id별 입장
+    @GetMapping("/chat/room/detail/{roomId}")
+    public String chatRoomDetail(Model model, @PathVariable Long roomId) {
+        log.info("roomId :"+roomId);
+        chatRoomService.findById(roomId);
+        model.addAttribute("roomId", roomId);
+        return "/chat/room_detail";
+    }
 
     @GetMapping(value = "/api/chat/chat-room")
     public @ResponseBody
     ResponseEntity<List<ChatRoomDto>> getChatRooms() {
-        log.info("get :: /api/chat/chat-room");
         List<ChatRoomDto> all = chatRoomService.findAll();
-        log.info("all : {}", all.toString());
         return ResponseEntity.ok(all);
     }
 
@@ -55,8 +61,6 @@ public class ChatRoomController {
     public @ResponseBody
     ResponseEntity<ChatRoom> save(@RequestBody ChatRoomDto requestDto) {
         // TODO: Validation 처리
-        log.info("post :: /api/chat/chat-room");
-        log.info("requestDto {} : ", requestDto);
         ChatRoom save = chatRoomService.save(requestDto);
         return ResponseEntity.ok(save);
     }
