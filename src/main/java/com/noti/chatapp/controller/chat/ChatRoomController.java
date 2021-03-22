@@ -1,6 +1,6 @@
 package com.noti.chatapp.controller.chat;
 
-import com.noti.chatapp.domain.ChatRoom;
+import com.noti.chatapp.domain.chat.ChatRoom;
 import com.noti.chatapp.domain.Member;
 import com.noti.chatapp.dto.ChatRoomDto;
 import com.noti.chatapp.repository.MemberRepository;

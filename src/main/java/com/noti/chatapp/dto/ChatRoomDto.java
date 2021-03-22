@@ -1,7 +1,7 @@
 package com.noti.chatapp.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.noti.chatapp.domain.ChatRoom;
+import com.noti.chatapp.domain.chat.ChatRoom;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

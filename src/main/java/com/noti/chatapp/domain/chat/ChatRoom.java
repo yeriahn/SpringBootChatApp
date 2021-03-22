@@ -1,4 +1,4 @@
-package com.noti.chatapp.domain;
+package com.noti.chatapp.domain.chat;
 
 import com.noti.chatapp.controller.BaseTimeEntity;
 import lombok.Builder;

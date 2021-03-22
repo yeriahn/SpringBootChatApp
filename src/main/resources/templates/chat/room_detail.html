@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Online Chatting</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <script src="/js/main.js" defer></script>
+    <div th:replace="/fragments/head.html :: fragment-head"></div>
 </head>
 
 <body>
@@ -33,23 +29,27 @@
         </div>
         <div class="listMessageGroup">
             <ul class="listSelectGroup">
-                <li class="listGroupItem">
-                    메시지
-                </li>
+
             </ul>
         </div>
         <div class="listMessageForm">
             <div class="listInputMessageWrap">
-                <textarea class="listPushArea"></textarea>
+                <textarea id="btn-input" class="listPushArea"></textarea>
             </div>
             <div class="listSendMessageWrap">
-                <button class="colorBtn blue listSendButton" data-key="color" data-value="pink">
+                <button id="btn-chat" class="colorBtn blue listSendButton" data-key="color" data-value="pink">
                     입력
                 </button>
             </div>
         </div>
     </section>
 </section>
+<input id="roomId" type="text" th:value="${roomId}"/>
+<script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
+
+
+<script type="text/javascript" src="/js/chat.js"></script>
 
 
 </body>
