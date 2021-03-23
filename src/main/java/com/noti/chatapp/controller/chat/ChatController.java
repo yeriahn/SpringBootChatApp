@@ -3,11 +3,12 @@ package com.noti.chatapp.controller.chat;
 import com.noti.chatapp.dto.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
@@ -17,7 +18,8 @@ import java.security.Principal;
 @Controller
 public class ChatController {
 
-    private final SimpMessageSendingOperations simpleMessageSendingOperation;
+    private final RedisTemplate redisTemplate;
+    private final ChannelTopic channelTopic;
 
     /**
      * 메시지 전송
@@ -26,11 +28,11 @@ public class ChatController {
      * @return
      */
     @MessageMapping("/{roomId}/chat.sendMessage")
-    public void sendMessage(@Payload ChatMessage chatMessage, @DestinationVariable Long roomId) {
-        log.info("send message " + roomId + " from" +chatMessage.getSender());
-        chatMessage.setSender(chatMessage.getSender());
+    public void sendMessage(@Payload ChatMessage chatMessage, Principal principal) {
+        log.info("send message " + chatMessage.getRoomId() + " from" + principal.getName());
+        chatMessage.setSender(principal.getName());
 
-        simpleMessageSendingOperation.convertAndSend("/topic/chatting." + roomId, chatMessage);
+        redisTemplate.convertAndSend(channelTopic.getTopic(), chatMessage);
     }
 
     /**
@@ -42,18 +44,21 @@ public class ChatController {
      */
     @MessageMapping("/{roomId}/chat.newUser")
     public void addUser(@Payload ChatMessage chatMessage, Principal principal
-            , SimpMessageHeaderAccessor headerAccessor
-            , @DestinationVariable Long roomId) {
-        log.info("chat.newUser roomId : {} ", roomId);
+            , SimpMessageHeaderAccessor headerAccessor) {
+        log.info("chat.newUser roomId : {} ", chatMessage.getRoomId());
         log.info("chat.newUser memberId : {} ", principal.getName());
         String sender = principal.getName();
 
         chatMessage.enter(sender);
 
         headerAccessor.getSessionAttributes().put("sender", sender);
-        headerAccessor.getSessionAttributes().put("roomId", roomId);
+        headerAccessor.getSessionAttributes().put("roomId", chatMessage.getRoomId());
 
-        simpleMessageSendingOperation.convertAndSend("/topic/chatting." + roomId, chatMessage);
+        log.info("channelTopic.getTopic() : {}", channelTopic.getTopic());
+        log.info("channelTopic.getContent() : {}", chatMessage.getContent());
+
+        redisTemplate.convertAndSend(channelTopic.getTopic(), chatMessage);
+
     }
 
 }

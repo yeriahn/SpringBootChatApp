@@ -1,31 +1,28 @@
 package com.noti.chatapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
 @Getter
-@ToString
 public class ChatMessage {
     private String type;
     private String content;
     @Setter
     private String sender;
-    private LocalDateTime dateTime;
-
-    public ChatMessage() {
-        dateTime = LocalDateTime.now();
-    }
+    private String roomId;
 
     @Builder
-    public ChatMessage(String type, String content, String sender) {
+    public ChatMessage(String type, String content, String sender,String roomId) {
         this.type = type;
         this.content = content;
         this.sender = sender;
-        this.dateTime = LocalDateTime.now();
+        this.roomId = roomId;
     }
 
     public void enter(String sender) {

@@ -30,6 +30,7 @@
         stompClient.subscribe('/topic/chatting.'+roomId, onMessageReceived);
 
         stompClient.send("/app/"+roomId+"/chat.newUser", {}, JSON.stringify({
+            roomId : roomId,
             sender : memberId,
             type : 'newUser'
         }));
@@ -48,6 +49,7 @@
 
         if (messageContent && stompClient) {
             let chatMessage = {
+                roomId : roomId,
                 sender : memberId,
                 content : messageContent,
                 type : 'CHAT'

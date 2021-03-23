@@ -37,4 +37,6 @@ public class ChatRoomService {
         ChatRoom chatRoom = requestDto.toEntity();
         return chatRoomRepository.save(chatRoom);
     }
+
+    
 }
