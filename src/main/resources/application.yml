@@ -3,15 +3,13 @@ server:
 spring:
   jpa:
     show-sql: true
-  h2:
-    console:
-      enabled: true
-      path: /h2
+    generate-ddl: true
+    database: mysql
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/chat?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: password
   thymeleaf:
     cache: false
   devtools:
