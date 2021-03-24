@@ -9,7 +9,7 @@
 <div th:replace="/fragments/header.html :: fragment-header"></div>
 
 <section class="sections">
-    <section class="lists">
+    <div class="lists">
         <div class="listTop">
             <div class="listCnt">
                 <button class="userCntBtn">
@@ -32,17 +32,17 @@
 
             </ul>
         </div>
-        <div class="listMessageForm">
-            <div class="listInputMessageWrap">
-                <textarea id="btn-input" class="listPushArea"></textarea>
-            </div>
-            <div class="listSendMessageWrap">
-                <button id="btn-chat" class="colorBtn blue listSendButton" data-key="color" data-value="pink">
-                    입력
-                </button>
-            </div>
+    </div>
+    <div class="listMessageForm">
+        <div class="listInputMessageWrap">
+            <textarea id="btn-input" class="listPushArea"></textarea>
         </div>
-    </section>
+        <div class="listSendMessageWrap">
+            <button id="btn-chat" class="colorBtn blue listSendButton" data-key="color" data-value="pink">
+                입력
+            </button>
+        </div>
+    </div>
 </section>
 <input id="roomId" type="text" th:value="${roomId}"/>
 <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
