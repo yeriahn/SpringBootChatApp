@@ -1,4 +1,4 @@
-package com.noti.chatapp.security.handler;
+package com.noti.chatapp.service.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -23,13 +23,10 @@ public class CustomFailureHandler implements AuthenticationFailureHandler {
         String loginFailMsg = exception.getMessage();
 
         if (exception instanceof AuthenticationServiceException) {
-            log.info("존재x");
             loginFailMsg = "존재하지 않는 사용자입니다.";
         } else if(exception instanceof BadCredentialsException) {
-            log.info("비밀번호x");
             loginFailMsg = "아이디 혹은 비밀번호가 맞지 않습니다.";
         } else if(exception instanceof InternalAuthenticationServiceException) {
-            log.info("내부문제");
             loginFailMsg = "내부적으로 발생한 시스템 문제로 인해 인증 요청을 처리할 수 없습니다.";
         }
 

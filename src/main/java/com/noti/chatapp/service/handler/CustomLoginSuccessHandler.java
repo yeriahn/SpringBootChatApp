@@ -1,4 +1,4 @@
-package com.noti.chatapp.security.handler;
+package com.noti.chatapp.service.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

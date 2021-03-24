@@ -1,8 +1,7 @@
 package com.noti.chatapp.config.security;
 
-import com.noti.chatapp.security.handler.CustomAccessDeniedHandler;
-import com.noti.chatapp.security.handler.CustomFailureHandler;
-import com.noti.chatapp.security.handler.CustomLoginSuccessHandler;
+import com.noti.chatapp.service.handler.CustomLoginSuccessHandler;
+import com.noti.chatapp.service.handler.CustomFailureHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -26,9 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomLoginSuccessHandler customLoginSuccessHandler;
 
     private final CustomFailureHandler customFailureHandler;
-
-    private final CustomAccessDeniedHandler customAccessDeniedHandler;
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {

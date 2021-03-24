@@ -1,6 +1,6 @@
 package com.noti.chatapp.config.websocket;
 
-import com.noti.chatapp.config.handler.StompHandler;
+import com.noti.chatapp.service.handler.StompHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;

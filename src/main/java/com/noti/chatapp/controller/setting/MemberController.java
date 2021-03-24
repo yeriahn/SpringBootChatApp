@@ -2,6 +2,7 @@ package com.noti.chatapp.controller.setting;
 
 import com.noti.chatapp.domain.Member;
 import com.noti.chatapp.repository.MemberRepository;
+import com.noti.chatapp.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,13 +23,12 @@ import java.util.Map;
 @RequestMapping("/setting")
 public class MemberController {
 
-    private final MemberRepository memberRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final MemberService memberService;
 
     @GetMapping("/memberList")
     public String memberList(@AuthenticationPrincipal User user, Map<String, Object> model) {
-        List<Member> members = memberRepository.findAll();
-        model.put("members", members);
+        //List<Member> members = memberRepository.findAll();
+        //model.put("members", members);
         model.put("currentMemberId", user.getUsername()); //로그인을 통해 인증된 유저 정보 저장
         return "setting/member_list";
     }
@@ -41,8 +41,7 @@ public class MemberController {
     @PostMapping("/regMember")
     public String regMember(Member member) {
         //PasswordEncoder로 비밀번호 암호화
-        member.setUserPw(passwordEncoder.encode(member.getMemberPw()));
-        memberRepository.save(member);
+        memberService.regMember(member);
         return "redirect:/chat/room";
     }
 

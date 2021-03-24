@@ -1,11 +1,11 @@
-var Commons = (function () {
+let Commons = (function () {
     /**
      * 공통 ajax call 함수
      * @param requestUrl
      * @param callback
      * @private
      */
-    var ajaxGet = function (requestUrl, callback) {
+    let ajaxGet = function (requestUrl, callback) {
         $.ajax({
             type: 'GET',
             url: requestUrl,
@@ -24,7 +24,7 @@ var Commons = (function () {
         });
     };
 
-    var ajaxPost = function (requestUrl, params, callback) {
+    let ajaxPost = function (requestUrl, params, callback) {
         $.ajax({
             type: 'POST',
             url: requestUrl,
@@ -41,7 +41,7 @@ var Commons = (function () {
         });
     };
 
-    var ajaxDelete = function (requestUrl, params, callback) {
+    let ajaxDelete = function (requestUrl, params, callback) {
         $.ajax({
             type: 'DELETE',
             url: requestUrl,
@@ -58,7 +58,7 @@ var Commons = (function () {
         });
     };
 
-    var ajaxPut = function (requestUrl, params, callback) {
+    let ajaxPut = function (requestUrl, params, callback) {
         $.ajax({
             type: 'PUT',
             url: requestUrl,
@@ -75,11 +75,11 @@ var Commons = (function () {
         });
     };
 
-    var null2Space = function (obj) {
+    let null2Space = function (obj) {
         return isEmpty(obj) ? '' : obj;
     };
 
-    var isEmpty = function (obj) {
+    let isEmpty = function (obj) {
         if (typeof obj == 'undefined' || obj === null || obj === '') return true;
         if (typeof obj == 'number' && isNaN(obj)) return true;
         if (typeof obj == 'object' && Object.keys(obj).length === 0) return true;
@@ -87,17 +87,17 @@ var Commons = (function () {
         return false;
     };
 
-    var isNotEmpty = function (obj) {
+    let isNotEmpty = function (obj) {
         return !isEmpty(obj);
     };
 
-    var initCap = function (str) {
+    let initCap = function (str) {
         str = str.substring(0, 1).toUpperCase() + str.substring(1, str.length).toLowerCase()
         return str;
     };
     // Unescape HTML in JS
     // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
-    var htmlDecode = function (input) {
+    let htmlDecode = function (input) {
         var e = document.createElement('textarea');
         e.innerHTML = input;
         // handle case of empty input

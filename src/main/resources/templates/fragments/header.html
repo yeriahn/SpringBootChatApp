@@ -4,8 +4,8 @@
     <header class="in-headers">
         <div>
             <table>
-                <tr th:each="member : ${members}">
-                    <td th:text="|${member.getMemberId()}님, 환영합니다!|"></td>
+                <tr>
+                    <td th:text="|${currentMemberId}님, 환영합니다!|"></td>
                 </tr>
             </table>
         </div>

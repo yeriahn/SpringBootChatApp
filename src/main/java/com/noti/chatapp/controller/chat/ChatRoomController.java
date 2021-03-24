@@ -28,7 +28,9 @@ public class ChatRoomController {
     //채팅 리스트 화면
     @GetMapping("/chat/room")
     public String rooms(@AuthenticationPrincipal User user, Map<String, Object> model) {
-        List<Member> members = memberRepository.findAll();
+
+        List<ChatRoomDto> members = chatRoomService.findAll();
+
         model.put("members", members);
         model.put("currentMemberId", user.getUsername()); //로그인을 통해 인증된 유저 정보 저장
 
