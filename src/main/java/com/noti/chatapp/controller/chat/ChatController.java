@@ -1,6 +1,7 @@
 package com.noti.chatapp.controller.chat;
 
 import com.noti.chatapp.dto.ChatMessage;
+import com.noti.chatapp.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -19,7 +20,7 @@ import java.security.Principal;
 public class ChatController {
 
     private final RedisTemplate redisTemplate;
-    private final ChannelTopic channelTopic;
+    private final ChatService chatService;
 
     /**
      * 메시지 전송
@@ -32,7 +33,8 @@ public class ChatController {
         log.info("send message " + chatMessage.getRoomId() + " from" + principal.getName());
         chatMessage.setSender(principal.getName());
 
-        redisTemplate.convertAndSend(channelTopic.getTopic(), chatMessage);
+        chatService.sendChatMessage(chatMessage);
+        //redisTemplate.convertAndSend(channelTopic.getTopic(), chatMessage);
     }
 
     /**
@@ -54,10 +56,11 @@ public class ChatController {
         headerAccessor.getSessionAttributes().put("sender", sender);
         headerAccessor.getSessionAttributes().put("roomId", chatMessage.getRoomId());
 
-        log.info("channelTopic.getTopic() : {}", channelTopic.getTopic());
+        log.info("sender : {}", sender);
         log.info("channelTopic.getContent() : {}", chatMessage.getContent());
 
-        redisTemplate.convertAndSend(channelTopic.getTopic(), chatMessage);
+        chatService.sendChatMessage(chatMessage);
+        //redisTemplate.convertAndSend(channelTopic.getTopic(), chatMessage);
 
     }
 

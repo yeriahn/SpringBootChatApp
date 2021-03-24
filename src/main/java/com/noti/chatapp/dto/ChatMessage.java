@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 
 @Getter
+@ToString
 public class ChatMessage {
     private String type;
     private String content;
