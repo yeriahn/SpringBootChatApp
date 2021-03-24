@@ -24,7 +24,6 @@ import java.util.Optional;
 @Component
 public class StompHandler implements ChannelInterceptor {
 
-    private final RedisTemplate redisTemplate;
     private final ChatService chatService;
 
     @Override
@@ -65,11 +64,8 @@ public class StompHandler implements ChannelInterceptor {
                                 .type("Leave")
                                 .sender(sender)
                                 .content(sender + " 님이 퇴장하였습니다.").build();
-                        log.info("11?? sender :" + sender);
-                        log.info("11?? roomId :" + roomId);
+
                         chatService.sendChatMessage(chatMessage);
-                        //redisTemplate.convertAndSend("/topic/chatting." + roomId, chatMessage);
-                        log.info("22??");
                     }
 
                     break;

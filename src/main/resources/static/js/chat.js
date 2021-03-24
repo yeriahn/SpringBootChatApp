@@ -24,6 +24,10 @@
 		$("#btn-chat").click(function(event) {
 			sendMessage(event);
 		});
+
+        $("#btnOut").click(function(event) {
+            outRoom(event);
+        });
 	});
 
     function connectionSuccess() {
@@ -140,4 +144,9 @@
         let chatHeight = panelBody.find(".listSelectGroup").height();
 		panelBody.scrollTop(chatHeight);
 	}
+
+    function outRoom(event){
+        window.location.href = "/chat/room";
+    }
+
 })(jQuery);

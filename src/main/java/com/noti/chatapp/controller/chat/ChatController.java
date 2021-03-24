@@ -19,7 +19,6 @@ import java.security.Principal;
 @Controller
 public class ChatController {
 
-    private final RedisTemplate redisTemplate;
     private final ChatService chatService;
 
     /**
@@ -34,7 +33,6 @@ public class ChatController {
         chatMessage.setSender(principal.getName());
 
         chatService.sendChatMessage(chatMessage);
-        //redisTemplate.convertAndSend(channelTopic.getTopic(), chatMessage);
     }
 
     /**
@@ -60,8 +58,6 @@ public class ChatController {
         log.info("channelTopic.getContent() : {}", chatMessage.getContent());
 
         chatService.sendChatMessage(chatMessage);
-        //redisTemplate.convertAndSend(channelTopic.getTopic(), chatMessage);
-
     }
 
 }
