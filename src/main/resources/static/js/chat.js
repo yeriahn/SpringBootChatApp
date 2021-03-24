@@ -3,17 +3,22 @@
     let memberId = null;
     let roomId = null;
     let myAccess = false;
+    let token = null;
 
 	/**
 	 * DOM객체만 로드 후에 socketUrl 업데이트 후 접근.
 	 */
 	$(document).ready(function() {
 	    roomId = $("#roomId").val();
-	    console.log("roomId :"+roomId);
         let socket = new SockJS('/stomp');
         stompClient = Stomp.over(socket);
 
-        stompClient.connect({}, connectionSuccess, connectionClose);
+        Commons.ajaxGet("/chat/user", function(data) {
+            token = data.token;
+            stompClient.connect({"token": token}, connectionSuccess, connectionClose);
+        })
+
+
 
 		$("#btn-input").keyup(function(event) {
 			if (event.keyCode == "13") {
@@ -33,7 +38,7 @@
     function connectionSuccess() {
         stompClient.subscribe('/topic/chatting.'+roomId, onMessageReceived);
 
-        stompClient.send("/app/"+roomId+"/chat.newUser", {}, JSON.stringify({
+        stompClient.send("/app/"+roomId+"/chat.newUser", {"token": token}, JSON.stringify({
             roomId : roomId,
             sender : memberId,
             type : 'newUser'
@@ -41,7 +46,6 @@
 	}
 
 	function connectionClose(message) {
-    	console.log(message);
 	    alert("서버와의 접속이 끊어졌습니다. \n" + message);
 	    //location.href = "/logout";
 	}
@@ -49,7 +53,6 @@
     function sendMessage(event) {
         let btnInput = $("#btn-input");
         let messageContent = btnInput.val();
-        console.log("btnInput.val() :"+btnInput.val());
 
         if (messageContent && stompClient) {
             let chatMessage = {
@@ -59,7 +62,7 @@
                 type : 'CHAT'
             };
 
-            stompClient.send("/app/"+roomId+"/chat.sendMessage", {}, JSON
+            stompClient.send("/app/"+roomId+"/chat.sendMessage", {"token": token}, JSON
                     .stringify(chatMessage));
             btnInput.val('');
         }
@@ -70,7 +73,6 @@
         let data = JSON.parse(payload.body);
         let type = data.type;
 
-        console.log('message', data);
         if(["Leave","newUser","CHAT"].includes(type)) {
             if(["Leave","newUser"].includes(type)) {
                 // 중복로그인이 발생한 경우 채팅방에 접속되었던 계정 전부 disconnect 처리

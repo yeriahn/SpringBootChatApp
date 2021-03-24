@@ -3,12 +3,16 @@ package com.noti.chatapp.controller.chat;
 import com.noti.chatapp.domain.chat.ChatRoom;
 import com.noti.chatapp.domain.Member;
 import com.noti.chatapp.dto.ChatRoomDto;
+import com.noti.chatapp.dto.LoginDto;
 import com.noti.chatapp.repository.MemberRepository;
 import com.noti.chatapp.service.ChatRoomService;
+import com.noti.chatapp.service.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +26,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ChatRoomController {
 
-    private final MemberRepository memberRepository;
+    private final JwtTokenProvider jwtTokenProvider;
     private final ChatRoomService chatRoomService;
 
     //채팅 리스트 화면
@@ -67,5 +71,11 @@ public class ChatRoomController {
         return ResponseEntity.ok(save);
     }
 
-
+    @GetMapping("/chat/user")
+    @ResponseBody
+    public LoginDto getUserInfo() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); //현재 세션 사용자의 정보를 알아내는 방법
+        String name = auth.getName();
+        return LoginDto.builder().name(name).token(jwtTokenProvider.generateToken(name)).build();
+    }
 }

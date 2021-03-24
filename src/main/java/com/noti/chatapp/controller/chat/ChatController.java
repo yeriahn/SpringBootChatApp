@@ -2,11 +2,13 @@ package com.noti.chatapp.controller.chat;
 
 import com.noti.chatapp.dto.ChatMessage;
 import com.noti.chatapp.service.ChatService;
+import com.noti.chatapp.service.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
@@ -19,6 +21,7 @@ import java.security.Principal;
 @Controller
 public class ChatController {
 
+    private final JwtTokenProvider jwtTokenProvider;
     private final ChatService chatService;
 
     /**
@@ -28,9 +31,12 @@ public class ChatController {
      * @return
      */
     @MessageMapping("/{roomId}/chat.sendMessage")
-    public void sendMessage(@Payload ChatMessage chatMessage, Principal principal) {
-        log.info("send message " + chatMessage.getRoomId() + " from" + principal.getName());
-        chatMessage.setSender(principal.getName());
+    public void sendMessage(@Payload ChatMessage chatMessage, @Header("token") String token) {
+
+        String sender = jwtTokenProvider.getUserNameFromJwt(token);
+
+        log.info("send message " + chatMessage.getRoomId() + " from" + sender);
+        chatMessage.setSender(sender);
 
         chatService.sendChatMessage(chatMessage);
     }
@@ -43,11 +49,13 @@ public class ChatController {
      * @return
      */
     @MessageMapping("/{roomId}/chat.newUser")
-    public void addUser(@Payload ChatMessage chatMessage, Principal principal
+    public void addUser(@Payload ChatMessage chatMessage, @Header("token") String token
             , SimpMessageHeaderAccessor headerAccessor) {
+
+        String sender = jwtTokenProvider.getUserNameFromJwt(token);
+
         log.info("chat.newUser roomId : {} ", chatMessage.getRoomId());
-        log.info("chat.newUser memberId : {} ", principal.getName());
-        String sender = principal.getName();
+        log.info("chat.newUser memberId : {} ", sender);
 
         chatMessage.enter(sender);
 

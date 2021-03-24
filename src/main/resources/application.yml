@@ -20,3 +20,5 @@ spring:
         max-active: 10
         max-idle: 10
         min-idle: 2
+  jwt:
+    secret: c2VjcmV0a2V5

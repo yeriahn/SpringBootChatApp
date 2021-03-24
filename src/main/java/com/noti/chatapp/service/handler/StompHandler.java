@@ -2,6 +2,7 @@ package com.noti.chatapp.service.handler;
 
 import com.noti.chatapp.dto.ChatMessage;
 import com.noti.chatapp.service.ChatService;
+import com.noti.chatapp.service.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
@@ -18,6 +19,8 @@ import java.util.Objects;
 public class StompHandler implements ChannelInterceptor {
 
     private final ChatService chatService;
+
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     public Message<?> preSend(final Message<?> message, final MessageChannel channel)  {
@@ -37,6 +40,11 @@ public class StompHandler implements ChannelInterceptor {
                     // 유저가 Websocket으로 connect()를 한 뒤 호출됨
                     log.debug("Login Id : {}", accessor.getLogin());
                     log.debug("User Token : {}", accessor.getPasscode());
+
+                    String jwtToken = accessor.getFirstNativeHeader("token");
+                    log.info("CONNECT jwtToken {}", jwtToken);
+                    //Header의 jwt token 검증
+                    jwtTokenProvider.validateToken(jwtToken);
                     break;
                 case CONNECTED:
                     break;
