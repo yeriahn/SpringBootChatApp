@@ -1,6 +1,6 @@
 package com.noti.chatapp.service;
 
-import com.noti.chatapp.domain.Member;
+import com.noti.chatapp.domain.setting.Member;
 import com.noti.chatapp.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

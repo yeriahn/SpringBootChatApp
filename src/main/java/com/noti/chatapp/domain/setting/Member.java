@@ -1,6 +1,6 @@
-package com.noti.chatapp.domain;
+package com.noti.chatapp.domain.setting;
 
-import com.noti.chatapp.controller.BaseTimeEntity;
+import com.noti.chatapp.domain.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

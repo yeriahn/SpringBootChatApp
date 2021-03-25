@@ -1,7 +1,7 @@
 package com.noti.chatapp.security;
 
-import com.noti.chatapp.domain.Member;
-import com.noti.chatapp.domain.Role;
+import com.noti.chatapp.domain.setting.Member;
+import com.noti.chatapp.domain.setting.Role;
 import com.noti.chatapp.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

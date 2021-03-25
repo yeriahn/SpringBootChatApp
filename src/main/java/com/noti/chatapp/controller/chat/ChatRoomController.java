@@ -1,10 +1,8 @@
 package com.noti.chatapp.controller.chat;
 
 import com.noti.chatapp.domain.chat.ChatRoom;
-import com.noti.chatapp.domain.Member;
 import com.noti.chatapp.dto.ChatRoomDto;
 import com.noti.chatapp.dto.LoginDto;
-import com.noti.chatapp.repository.MemberRepository;
 import com.noti.chatapp.service.ChatRoomService;
 import com.noti.chatapp.service.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -43,15 +41,16 @@ public class ChatRoomController {
 
     //채팅방 입장 화면
     @GetMapping("/chat/room/detail")
-    public String roomDetail(Model model) {
+    public String roomDetail(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("currentMemberId", user.getUsername());
         return "chat/room_detail";
     }
 
     //채팅방 id별 입장
     @GetMapping("/chat/room/detail/{roomId}")
-    public String chatRoomDetail(Model model, @PathVariable Long roomId) {
-        log.info("roomId :"+roomId);
+    public String chatRoomDetail(@AuthenticationPrincipal User user, Model model, @PathVariable Long roomId) {
         chatRoomService.findById(roomId);
+        model.addAttribute("currentMemberId", user.getUsername());
         model.addAttribute("roomId", roomId);
         return "/chat/room_detail";
     }

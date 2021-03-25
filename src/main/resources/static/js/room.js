@@ -36,6 +36,7 @@ const Room = (function () {
         Commons.ajaxPost("/api/chat/chat-room", params, function(resp) {
             getListRenderAll();
         });
+        modal.style.display = "none";
     };
     const updateRoom = function () {
         alert("updateRoom");

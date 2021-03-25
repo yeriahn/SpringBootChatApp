@@ -1,4 +1,4 @@
-package com.noti.chatapp.domain;
+package com.noti.chatapp.domain.setting;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

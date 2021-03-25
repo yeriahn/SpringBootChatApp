@@ -1,6 +1,6 @@
 package com.noti.chatapp.repository;
 
-import com.noti.chatapp.domain.Member;
+import com.noti.chatapp.domain.setting.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
