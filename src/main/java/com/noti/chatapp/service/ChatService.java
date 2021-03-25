@@ -1,6 +1,6 @@
 package com.noti.chatapp.service;
 
-import com.noti.chatapp.dto.ChatMessage;
+import com.noti.chatapp.dto.chat.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;

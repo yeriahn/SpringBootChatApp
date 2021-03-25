@@ -1,4 +1,4 @@
-package com.noti.chatapp.dto;
+package com.noti.chatapp.dto.chat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package com.noti.chatapp.service;
 
 import com.noti.chatapp.domain.chat.ChatRoom;
-import com.noti.chatapp.dto.ChatRoomDto;
+import com.noti.chatapp.dto.chat.ChatRoomDto;
 import com.noti.chatapp.exception.ChatRoomNotFoundException;
 import com.noti.chatapp.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;

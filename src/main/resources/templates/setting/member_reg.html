@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form th:object="${member}" th:action="@{/setting/regMember}" th:method="post" class="loginForm">
+<form th:object="${memberDto}" th:action="@{/setting/regMember}" th:method="post" class="loginForm">
     <h2>Sign Up</h2>
     <div class="idForm"><label>아이디
         <input type="text" th:field="*{memberId}" class="id">

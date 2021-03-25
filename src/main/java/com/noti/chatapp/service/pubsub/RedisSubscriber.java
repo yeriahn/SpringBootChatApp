@@ -1,12 +1,9 @@
 package com.noti.chatapp.service.pubsub;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.noti.chatapp.dto.ChatMessage;
+import com.noti.chatapp.dto.chat.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.connection.Message;
-import org.springframework.data.redis.connection.MessageListener;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
 

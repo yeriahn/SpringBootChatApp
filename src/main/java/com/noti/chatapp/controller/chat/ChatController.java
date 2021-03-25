@@ -1,20 +1,15 @@
 package com.noti.chatapp.controller.chat;
 
-import com.noti.chatapp.dto.ChatMessage;
+import com.noti.chatapp.dto.chat.ChatMessage;
 import com.noti.chatapp.service.ChatService;
 import com.noti.chatapp.service.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.listener.ChannelTopic;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
-
-import java.security.Principal;
 
 @Slf4j
 @RequiredArgsConstructor

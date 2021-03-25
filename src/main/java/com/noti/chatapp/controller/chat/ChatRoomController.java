@@ -1,7 +1,7 @@
 package com.noti.chatapp.controller.chat;
 
 import com.noti.chatapp.domain.chat.ChatRoom;
-import com.noti.chatapp.dto.ChatRoomDto;
+import com.noti.chatapp.dto.chat.ChatRoomDto;
 import com.noti.chatapp.dto.LoginDto;
 import com.noti.chatapp.service.ChatRoomService;
 import com.noti.chatapp.service.jwt.JwtTokenProvider;

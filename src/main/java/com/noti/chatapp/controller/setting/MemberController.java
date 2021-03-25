@@ -1,15 +1,18 @@
 package com.noti.chatapp.controller.setting;
 
 import com.noti.chatapp.domain.setting.Member;
+import com.noti.chatapp.dto.setting.MemberDto;
 import com.noti.chatapp.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Slf4j
 @Controller
@@ -20,19 +23,25 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/regMember")
-    public String regMemberForm(Member member) {
+    public String regMemberForm(Principal principal, MemberDto memberdto) {
+        if(principal != null) {
+            return "redirect:/chat/room";
+        }
         return "setting/member_reg";
     }
 
     @PostMapping("/regMember")
-    public String regMember(Member member) {
+    public String regMember(MemberDto memberdto) {
         //PasswordEncoder로 비밀번호 암호화
-        memberService.regMember(member);
+        memberService.regMember(memberdto);
         return "redirect:/chat/room";
     }
 
     @GetMapping("/loginMember")
-    public String loginMemberForm() {
+    public String loginMemberForm(Principal principal) {
+        if(principal != null) {
+            return "redirect:/chat/room";
+        }
         return "setting/member_login";
     }
 

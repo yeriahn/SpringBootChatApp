@@ -1,6 +1,6 @@
 package com.noti.chatapp.service.handler;
 
-import com.noti.chatapp.dto.ChatMessage;
+import com.noti.chatapp.dto.chat.ChatMessage;
 import com.noti.chatapp.service.ChatService;
 import com.noti.chatapp.service.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
