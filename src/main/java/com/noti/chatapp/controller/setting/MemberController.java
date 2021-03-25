@@ -5,14 +5,13 @@ import com.noti.chatapp.dto.setting.MemberDto;
 import com.noti.chatapp.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -30,11 +29,21 @@ public class MemberController {
         return "setting/member_reg";
     }
 
+    @ResponseBody
     @PostMapping("/regMember")
-    public String regMember(MemberDto memberdto) {
-        //PasswordEncoder로 비밀번호 암호화
-        memberService.regMember(memberdto);
-        return "redirect:/chat/room";
+    public Map<String, Object> regMember(@RequestBody MemberDto memberdto) {
+        Map<String, Object> response = new HashMap<>();
+
+        try{
+            memberService.regMember(memberdto);
+            response.put("success", true);
+            return response;
+        }
+        catch(Exception e){
+            response.put("success", false);
+        }
+
+        return response;
     }
 
     @GetMapping("/loginMember")

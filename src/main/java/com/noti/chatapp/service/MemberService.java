@@ -25,7 +25,6 @@ public class MemberService {
         validateDuplicateMember(memberDto.getMemberId());
         //PasswordEncoder로 비밀번호 암호화
 
-        log.info("???");
         memberRepository.save(Member.builder()
                                 .memberId(memberDto.getMemberId())
                                 .memberPw(passwordEncoder.encode(memberDto.getMemberPw()))
@@ -35,10 +34,8 @@ public class MemberService {
     private void validateDuplicateMember(String memberId){
         Optional<Member> findMembers = memberRepository.findByMemberId(memberId);
 
-        log.info("findMembers1 :"+findMembers);
         findMembers.ifPresent(findMember -> {
             throw new IllegalStateException("이미 존재하는 회원");
         });
-        log.info("findMembers2 :"+findMembers);
     }
 }

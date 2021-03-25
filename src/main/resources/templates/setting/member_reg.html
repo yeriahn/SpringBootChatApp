@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <div th:replace="/fragments/head.html :: fragment-head"></div>
     <link rel="stylesheet" th:href="@{/css/loginForm.css}" />
-    <title>Join</title>
+
+    <script src="/js/sweetalert.min.js" defer></script>
+    <script src="/js/login.js" defer></script>
 </head>
 <body>
-
-<form th:object="${memberDto}" th:action="@{/setting/regMember}" th:method="post" class="loginForm">
-    <h2>Sign Up</h2>
-    <div class="idForm"><label>아이디
-        <input type="text" th:field="*{memberId}" class="id">
-    </label></div>
-    <div class="passForm"><label>비밀번호
-        <input type="password" th:field="*{memberPw}" class="pw">
-    </label></div>
-    <button type="submit" class="btn">저장</button>
-</form>
-
+    <section>
+        <div>
+            <form th:method="post" class="loginForm">
+                <h2>Sign Up</h2>
+                <div class="idForm"><label>아이디
+                    <input type="text" th:name="memberId" id="memberId" class="id" required>
+                </label></div>
+                <div class="passForm"><label>비밀번호
+                    <input type="password" th:name="memberPw" id="memberPw" class="pw" required>
+                </label></div>
+                <button type="button" onclick="registerMember();" class="btn">저장</button>
+                <div class="mt-4 text-center">
+                    Already have an account? <a th:href="@{'/setting/loginMember'}">Login</a>
+                </div>
+            </form>
+        </div>
+    </section>
 </body>
 </html>
