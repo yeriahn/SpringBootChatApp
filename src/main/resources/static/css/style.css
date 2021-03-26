@@ -14,6 +14,7 @@
     --color-light-red: #e5c1c5;
     --color-light-navy: #6eceda;
     --color-dark-ivory: #b57fb3;
+    --color-dark-navy: #98acf8;
 
     /* size */
     --base-space: 8px;
@@ -72,6 +73,30 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.sections-top {
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-section {
+    height: 80%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.participant-section {
+    border-left: var(--border-size) solid var(--color-light-grey);
+    background-color: white;
+    height: 80%;
+    width: 10%;
 }
 
 .logo {
@@ -157,10 +182,18 @@ body {
 
 .lists {
     background-color: var(--color-white);
-    width: 50%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.participant-list {
+    height: 100%;
+}
+
+.panel-primary {
+    height: 100%;
 }
 
 .listTop {
@@ -171,6 +204,19 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: var(--border-size) solid var(--color-light-grey);
+}
+
+.panel-heading {
+    background-color: var(--color-ivory-color);
+    height: 14%;
+    display: flex;
+    justify-content : center;
+    align-items: center;
+    border-bottom: var(--border-size) solid var(--color-light-grey);
+}
+
+.panel-body {
+    overflow-y: auto;
 }
 
 .userCntBtn {
@@ -212,7 +258,7 @@ body {
 }
 
 .listMessageForm {
-    width: 50%;
+    width: 100%;
     height: 15%;
     display: flex;
     align-items: flex-end;

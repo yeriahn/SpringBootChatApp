@@ -31,7 +31,6 @@ public class WebSocketMessageBrokerConfig implements WebSocketMessageBrokerConfi
 
 	@Override
 	public void configureClientInboundChannel(ChannelRegistration registration) {
-		log.info("============handler 실행 전 인터셉터============");
 		registration.interceptors(stompHandler);
 	}
 }

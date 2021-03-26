@@ -8,44 +8,60 @@
 <body>
 
 <div th:replace="/fragments/header.html :: fragment-header"></div>
-
-<section class="sections">
-    <div class="lists">
-        <div class="listTop">
-            <div class="listCnt">
-                <button class="userCntBtn">
-                    <img src="/img/user_icon.png" class="iconUserCnt"/>
-                </button>
-                <strong id="chatTotalCnt">1</strong>
-                <span class="txt_personCnt">명</span>
+<section class="sections-top">
+    <div class="chat-section">
+        <div class="lists">
+            <div class="listTop">
+                <div class="listCnt">
+                    <button class="userCntBtn">
+                        <img src="/img/user_icon.png" class="iconUserCnt"/>
+                    </button>
+                    <strong id="chatTotalCnt">1</strong>
+                    <span class="txt_personCnt">명</span>
+                </div>
+                <div class="listOut">
+                    <button id="btnOut" class="btn userOutBtn">
+                        <img src="/img/out.png" class="iconOut"/>
+                    </button>
+                </div>
             </div>
-            <div class="listOut">
-                <button id="btnOut" class="btn userOutBtn">
-                    <img src="/img/out.png" class="iconOut"/>
-                </button>
+            <div class="listRoomName">
+                <h4 class="listNameItem">채팅방 이름</h4>
+            </div>
+            <div class="listMessageGroup">
+                <ul class="listSelectGroup">
+
+                </ul>
             </div>
         </div>
-        <div class="listRoomName">
-            <h4 class="listNameItem">채팅방 이름</h4>
-        </div>
-        <div class="listMessageGroup">
-            <ul class="listSelectGroup">
-
-            </ul>
+        <div class="listMessageForm">
+            <div class="listInputMessageWrap">
+                <textarea id="btn-input" class="listPushArea"></textarea>
+            </div>
+            <div class="listSendMessageWrap">
+                <button id="btn-chat" class="colorBtn blue listSendButton" data-key="color" data-value="pink">
+                    입력
+                </button>
+            </div>
         </div>
     </div>
-    <div class="listMessageForm">
-        <div class="listInputMessageWrap">
-            <textarea id="btn-input" class="listPushArea"></textarea>
-        </div>
-        <div class="listSendMessageWrap">
-            <button id="btn-chat" class="colorBtn blue listSendButton" data-key="color" data-value="pink">
-                입력
-            </button>
+    <div class="participant-section">
+        <div class="participant-list">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                 <label>대화상대</label>
+                </div>
+                <div class="panel-body">
+                    <ul class="participant-users">
+
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section>
-<input id="roomId" type="text" th:value="${roomId}"/>
+
+<input id="roomId" type="hidden" th:value="${roomId}"/>
 <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
 

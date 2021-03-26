@@ -74,7 +74,9 @@
         let type = data.type;
 
         if(["Leave","newUser","CHAT"].includes(type)) {
+            console.log("???");
             if(["Leave","newUser"].includes(type)) {
+                console.log("???2");
                 // 중복로그인이 발생한 경우 채팅방에 접속되었던 계정 전부 disconnect 처리
                 if("newUser" === type) {
                     if(memberId === data.memberId) {
@@ -87,16 +89,16 @@
                     }
                 }
                 // 채팅방 인원 정보 갱신.
-                //stompClient.send("/app/"+roomId+"/chat.callParticipants", {}, JSON.stringify({}))
+                stompClient.send("/app/"+roomId+"/chat.callParticipants", {"token": token}, JSON.stringify({}))
             }
 
             memberId =  data.sender;
             let dateTime = moment(data.dateTime).format("YYYY-MM-DD HH:mm:ss");
             printMessage(data.content, data.sender, dateTime);
-            return;
         }
-
-        //printParticipants(data);
+        console.log("111");
+        console.log(data);
+        printParticipants(data);
     }
 
     // disconnect 처리 후 로그아웃
@@ -109,7 +111,8 @@
 	 * 전송받은 내용을 뿌림.
 	 */
 	function printMessage(message, userName, dateTime) {
-        let chat = $(".sections ul.listSelectGroup");
+
+        let chat = $(".chat-section ul.listSelectGroup");
         let wrap = $(document.createElement("li")).addClass("left").addClass(
 				"clearfix");
 
@@ -149,6 +152,44 @@
 
     function outRoom(event){
         window.location.href = "/chat/room";
+    }
+
+    /**
+     * 유저정보를 오른쪽에 업데이트
+     */
+    function printParticipants(participantData) {
+        console.log("222");
+        console.log(participantData);
+        let participantUsers = $(".participant-section ul.participant-users");
+        // 자식노드 전부 삭제 후에 현재 유저를 넣음.
+        participantUsers.empty();
+        $.each(participantData, function(ind, obj) {
+            console.log("333");
+            console.log(ind);
+            console.log("444");
+            console.log(obj);
+            let wrap = $(document.createElement("li")).attr({
+                "class" : "left clearfix"
+            });
+
+            let userBody = $(document.createElement("div")).attr({
+                "class" : "user-body clearfix"
+            });
+
+            let userBodyHeader = $(document.createElement("div")).addClass(
+                "header");
+            let primaryFont = $(document.createElement("strong")).addClass(
+                "primary-font");
+
+            primaryFont.text(obj.memberId);
+
+            userBodyHeader.append(primaryFont);
+            userBody.append(userBodyHeader);
+
+            wrap.append(userBody);
+
+            participantUsers.append(wrap);
+        });
     }
 
 })(jQuery);
