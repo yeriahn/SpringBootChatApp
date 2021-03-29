@@ -22,3 +22,11 @@ spring:
         min-idle: 2
   jwt:
     secret: c2VjcmV0a2V5
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace

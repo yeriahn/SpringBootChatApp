@@ -17,24 +17,25 @@
     <!--Buttons-->
     <section class="buttons">
         <section class="button-group-prepend">
-            <button class="btn colorBtn" data-key="category" data-value="cgChat">
-                수다
-            </button>
-            <button class="btn colorBtn" data-key="category" data-value="cgGame">
-                게임
-            </button>
-            <button class="btn colorBtn" data-key="category" data-value="cgStudy">
-                공부
-            </button>
-            <button class="btn colorBtn" data-key="category" data-value="cgAni">
-                애니
-            </button>
-            <button class="btn colorBtn" data-key="category" data-value="cgMeet">
-                모임
-            </button>
-            <button class="btn colorBtn" data-key="category" data-value="cgShop">
-                쇼핑
-            </button>
+            <div class="w100" style="padding-right: 10px">
+                <select class="form-control form-control-sm" id="keywordType">
+                    <option value="">분류</option>
+                    <option value="cgChat">수다</option>
+                    <option value="cgGame">게임</option>
+                    <option value="cgStudy">공부</option>
+                    <option value="cgAni">애니</option>
+                    <option value="cgMeet">모임</option>
+                    <option value="cgShop">쇼핑</option>
+                </select>
+            </div>
+
+            <div class="w300" style="padding-right: 10px">
+                <input type="text" class="form-control form-control-sm" name="keyword" id="keyword" placeholder="채팅방 이름">
+            </div>
+
+            <div>
+                <button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch" onclick='searchChatRoomList()'>검색</button>
+            </div>
         </section>
         <section>
             <button id="open" class="btn colorBtn" data-key="color">
@@ -70,6 +71,14 @@
     <!--Items-->
     <ul class="items"></ul>
 </section>
+<!-- pagination{s} -->
+<div id="pagination" class="pagination">
+    <ul id="paginationBox" class="paginationBox">
 
+    </ul>
+</div>
+<!-- pagination{e} -->
+<input type="hidden" id="searchInput" value="" />
+<input type="hidden" id="searchType" value="" />
 </body>
 </html>

@@ -1,6 +1,5 @@
 package com.noti.chatapp.service;
 
-import com.google.gson.Gson;
 import com.noti.chatapp.dto.ConvertDto;
 import com.noti.chatapp.dto.chat.ChatMessage;
 import com.noti.chatapp.dto.chat.ChatParticipantDto;

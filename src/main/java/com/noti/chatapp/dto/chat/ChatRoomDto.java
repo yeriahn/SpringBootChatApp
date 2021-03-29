@@ -1,6 +1,8 @@
 package com.noti.chatapp.dto.chat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.noti.chatapp.domain.chat.ChatRoom;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,4 +45,11 @@ public class ChatRoomDto {
                 .category(category)
                 .build();
     }
+
+    /*public static ChatRoomDto of(ChatRoom chatRoom){
+        return ChatRoomDto.builder()
+                .name(chatRoom.getName())
+                .category(chatRoom.getCategory())
+                .build();
+    }*/
 }
