@@ -68,11 +68,19 @@ body {
 }
 
 .sections {
-    height: 90vh;
+    height: 550px;
+    width: 70%;
     display: flex;
+    margin : 0 auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.button-group-prepend {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
 }
 
 .sections-top {
@@ -201,7 +209,7 @@ body {
     background-color: var(--color-ivory-color);
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content : flex-end;
     align-items: center;
     border-bottom: var(--border-size) solid var(--color-light-grey);
 }
@@ -335,4 +343,57 @@ body {
 .input-group-prepend {
     display: flex;
     align-items: center;
+}
+
+button.img-button{
+    border: none;
+    background: url("/img/room_search2.png") no-repeat transparent;
+    border: none;
+    font-size: x-small;
+    width: 32px;
+    height: 28px;
+    cursor: pointer;
+}
+
+select {
+    border: none;
+    outline: none;
+    width: 80px;
+    font-size: 1.125rem;
+    font-weight: 200;
+    background: transparent;
+    color: black;
+}
+
+.keyword{
+    border : none;
+    border-bottom: 1px solid black;
+    outline: none;
+    background: transparent;
+    width: 150px;
+    color: black;
+    font-size: 1.063rem;
+    font-family: 'Malgun Gothic';
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size);
+}
+
+.paginationBox {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+.page-item {
+    margin-right: 10px;
+}
+
+.create-room-section {
+    height: 50px;
 }

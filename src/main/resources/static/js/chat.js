@@ -95,9 +95,8 @@
             memberId =  data.sender;
             let dateTime = moment(data.dateTime).format("YYYY-MM-DD HH:mm:ss");
             printMessage(data.content, data.sender, dateTime);
+            return;
         }
-        console.log("111");
-        console.log(data);
         printParticipants(data);
     }
 

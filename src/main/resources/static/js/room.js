@@ -102,9 +102,11 @@ function getPage(data) {
 
     let block = "";
 
-    block += `<li class="page-item">
-                    <a class="page-link" href="javascript:Room.getListRenderAll(${startPage})" aria-disabled="true">Previous</a>
-                </li>`;
+    block += `<li id="page-prev" class="page-item">
+                <a class="arrow prev" href="javascript:Room.getListRenderAll(${startPage})" aria-disabled="true">
+                    <span class="sr-only"><img class="img_prev" src="/img/page_prev.png"></span>
+                </a>
+               </li>`;
 
     for (let i = startPage ; i <= endPage; i++) {
         if (data !== i) {
@@ -114,11 +116,13 @@ function getPage(data) {
         }
     }
 
-    block += `<li class="page-item">
-                <a class="page-link" href="javascript:Room.getListRenderAll(${endPage})">Next</a>
+    block += `<li id="page-next" class="page-item">
+                <a class="arrow next" href="javascript:Room.getListRenderAll(${endPage})">
+                    <span class="sr-only"><img class="img_next" src="/img/page_next.png"></span>
+                </a>
               </li>`;
 
-    $("#pagination").html(block);
+    $("#paginationBox").html(block);
 
 }
 
