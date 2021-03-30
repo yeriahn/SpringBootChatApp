@@ -6,8 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Optional;
+
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
     //Page<ChatRoom> findAll(Pageable pageable, Integer totalElements);
 
     Page<ChatRoom> findByCategoryContainingAndNameContaining(String category, String name, Pageable pageable);
+
+    Optional<ChatRoom> findByRoomId(String roomId);
 }

@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class ChatRoomNotFoundException extends RuntimeException {
-    private Long requestRoomId;
+    private String requestRoomId;
 
-    public ChatRoomNotFoundException(Long requestRoomId) {
+    public ChatRoomNotFoundException(String requestRoomId) {
         super();
         this.requestRoomId = requestRoomId;
     }

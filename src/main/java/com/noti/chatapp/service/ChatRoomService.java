@@ -22,9 +22,9 @@ public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
 
     @Transactional(readOnly = true)
-    public ChatRoomDto findById(Long id) {
-        ChatRoom entity = chatRoomRepository.findById(id)
-                .orElseThrow(() -> new ChatRoomNotFoundException(id));
+    public ChatRoomDto findByRoomId(String roomId) {
+        ChatRoom entity = chatRoomRepository.findByRoomId(roomId)
+                .orElseThrow(() -> new ChatRoomNotFoundException(roomId));
         return new ChatRoomDto(entity);
     }
 

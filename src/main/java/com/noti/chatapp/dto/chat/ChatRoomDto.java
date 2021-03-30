@@ -9,12 +9,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
 public class ChatRoomDto {
 
     private Long id;
+    private String roomId;
     private String name;
     private String category;
 
@@ -25,13 +27,15 @@ public class ChatRoomDto {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public ChatRoomDto(String name,String category) {
+    public ChatRoomDto(String roomId, String name,String category) {
+        this.roomId = roomId;
         this.name = name;
         this.category = category;
     }
 
     public ChatRoomDto(ChatRoom chatRoom) {
         this.id = chatRoom.getId();
+        this.roomId = chatRoom.getRoomId();
         this.name = chatRoom.getName();
         this.category = chatRoom.getCategory();
         this.createdDate = chatRoom.getCreatedDate();
@@ -41,15 +45,9 @@ public class ChatRoomDto {
 
     public ChatRoom toEntity() {
         return ChatRoom.builder()
+                .roomId(UUID.randomUUID().toString())
                 .name(name)
                 .category(category)
                 .build();
     }
-
-    /*public static ChatRoomDto of(ChatRoom chatRoom){
-        return ChatRoomDto.builder()
-                .name(chatRoom.getName())
-                .category(chatRoom.getCategory())
-                .build();
-    }*/
 }

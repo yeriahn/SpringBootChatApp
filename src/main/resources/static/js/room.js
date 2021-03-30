@@ -2,6 +2,7 @@ const Room = (function () {
 
     let page = 0;
     let size = 10;
+    var chatrooms = new Array();
 
 
     // TODO: Overlay
@@ -22,6 +23,11 @@ const Room = (function () {
             if(Commons.isNotEmpty(data)) {
                 displayItems(data);
                 getPage(data);
+                console.log(data);
+                console.log(data.contents.roomId);
+                chatrooms = data.contents.roomId;
+                console.log("1111");
+                console.log(chatrooms);
             }else {
                 container.innerHTML = `
                     <li class="item">
@@ -46,9 +52,11 @@ const Room = (function () {
             getListRenderAll();
         });
 
-        $('#room-category').find('option:first').attr('selected', 'selected');
+        /*$('#room-category').find('option:first').attr('selected', 'selected');
         $('#room-name').val('');
-        modal.style.display = "none";
+        modal.style.display = "none";*/
+
+        location.href="/chat/room/detail/"+roomId;
     };
     const updateRoom = function () {
         alert("updateRoom");
@@ -68,7 +76,7 @@ const Room = (function () {
 function createHTMLString(item) {
     return `
     <li class="item">
-        <span class="item__description"><a href="/chat/room/detail/${item.id}">${item.name}</a></span>
+        <span class="item__description"><a href="/chat/room/detail/${item.roomId}">${item.name}</a></span>
     </li>
     `;
 }
