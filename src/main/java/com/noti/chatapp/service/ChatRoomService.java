@@ -54,5 +54,10 @@ public class ChatRoomService {
         return chatRoomRepository.save(chatRoom);
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteByRoomId(String roomId) {
+        chatRoomRepository.deleteByRoomId(roomId);
+    }
+
     
 }

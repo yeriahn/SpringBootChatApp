@@ -52,11 +52,11 @@ const Room = (function () {
             getListRenderAll();
         });
 
-        /*$('#room-category').find('option:first').attr('selected', 'selected');
+        $('#room-category').find('option:first').attr('selected', 'selected');
         $('#room-name').val('');
-        modal.style.display = "none";*/
+        modal.style.display = "none";
 
-        location.href="/chat/room/detail/"+roomId;
+        //location.href="/chat/room/detail/"+roomId;
     };
     const updateRoom = function () {
         alert("updateRoom");

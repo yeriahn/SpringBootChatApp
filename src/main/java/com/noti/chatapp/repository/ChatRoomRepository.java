@@ -14,4 +14,6 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
     Page<ChatRoom> findByCategoryContainingAndNameContaining(String category, String name, Pageable pageable);
 
     Optional<ChatRoom> findByRoomId(String roomId);
+
+    void deleteByRoomId(String roomId);
 }

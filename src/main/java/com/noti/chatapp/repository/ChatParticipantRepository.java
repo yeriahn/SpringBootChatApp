@@ -9,4 +9,6 @@ public interface ChatParticipantRepository extends JpaRepository<ChatParticipant
     List<ChatParticipant> findByRoomId(String roomId);
 
     void deleteByMemberId(String memberId);
+
+    long countByRoomId(String roomId);
 }

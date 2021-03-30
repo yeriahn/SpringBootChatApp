@@ -2,6 +2,8 @@ package com.noti.chatapp.service.handler;
 
 import com.noti.chatapp.dto.chat.ChatMessage;
 import com.noti.chatapp.repository.ChatParticipantRepository;
+import com.noti.chatapp.service.ChatParticipantService;
+import com.noti.chatapp.service.ChatRoomService;
 import com.noti.chatapp.service.ChatService;
 import com.noti.chatapp.service.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +21,13 @@ import java.util.Objects;
 @Component
 public class StompHandler implements ChannelInterceptor {
 
-    private final ChatService chatService;
-
     private final JwtTokenProvider jwtTokenProvider;
 
-    private final ChatParticipantRepository chatParticipantRepository;
+    private final ChatService chatService;
+
+    private final ChatParticipantService chatParticipantService;
+
+    private final ChatRoomService chatRoomService;
 
     @Override
     public Message<?> preSend(final Message<?> message, final MessageChannel channel)  {
@@ -72,9 +76,18 @@ public class StompHandler implements ChannelInterceptor {
                                 .sender(sender)
                                 .content(sender + " 님이 퇴장하였습니다.").build();
 
-                        chatParticipantRepository.deleteById(participantId);
+                        chatParticipantService.deleteById(participantId);
                         chatService.sendChatMessage(chatMessage);
+
+                        long participantCnt = chatParticipantService.countByRoomId(roomId);
+                        log.info("participantCnt 수 :" +participantCnt);
+
+                        if(participantCnt == 0) {
+                            chatRoomService.deleteByRoomId(roomId);
+                        }
                     }
+
+
 
                     break;
                 default:

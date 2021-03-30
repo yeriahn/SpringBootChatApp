@@ -34,4 +34,14 @@ public class ChatParticipantService {
         return chatParticipantRepository.findByRoomId(roomId)
                 .stream().map(ChatParticipantDto::new).collect(Collectors.toList());
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteById(Long participantId) {
+        chatParticipantRepository.deleteById(participantId);
+    }
+
+    @Transactional(readOnly = true)
+    public long countByRoomId(String roomId) {
+        return chatParticipantRepository.countByRoomId(roomId);
+    }
 }
