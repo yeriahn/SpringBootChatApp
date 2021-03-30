@@ -25,9 +25,9 @@ const Room = (function () {
                 getPage(data);
                 console.log(data);
                 console.log(data.contents.roomId);
-                chatrooms = data.contents.roomId;
+                //chatrooms = data.contents.roomId;
                 console.log("1111");
-                console.log(chatrooms);
+               // console.log(chatrooms);
             }else {
                 container.innerHTML = `
                     <li class="item">
@@ -76,7 +76,12 @@ const Room = (function () {
 function createHTMLString(item) {
     return `
     <li class="item">
-        <span class="item__description"><a href="/chat/room/detail/${item.roomId}">${item.name}</a></span>
+        <span class="item__description">
+            <a href="/chat/room/detail/${item.roomId}">
+                <label class="item_name">${item.name}</label>
+                <label class="item_createdDate">${item.createdDate}</label>
+             </a>
+        </span>
     </li>
     `;
 }

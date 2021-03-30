@@ -54,9 +54,11 @@ public class ChatRoomController {
     @GetMapping("/chat/room/detail/{roomId}")
     public String chatRoomDetail(@AuthenticationPrincipal User user, Model model, @PathVariable String roomId) {
         log.info("detail roomId : "+roomId);
-        chatRoomService.findByRoomId(roomId);
+        ChatRoomDto chatRoomDto = chatRoomService.findByRoomId(roomId);
         model.addAttribute("currentMemberId", user.getUsername());
         model.addAttribute("roomId", roomId);
+        model.addAttribute("chatRoomDto", chatRoomDto);
+
         return "/chat/room_detail";
     }
 

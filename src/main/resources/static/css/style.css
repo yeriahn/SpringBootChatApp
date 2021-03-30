@@ -188,6 +188,16 @@ body {
     font-size: var(--font-size);
 }
 
+.item_createdDate {
+    color: var(--color-dark-grey);
+    cursor: pointer;
+}
+
+.item_name {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
 .lists {
     background-color: var(--color-white);
     width: 100%;
