@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
 
+    @Transactional(readOnly = true)
     public ChatRoomDto findById(Long id) {
         ChatRoom entity = chatRoomRepository.findById(id)
                 .orElseThrow(() -> new ChatRoomNotFoundException(id));
@@ -47,7 +48,7 @@ public class ChatRoomService {
         return chatRoomRepository.findByCategoryContainingAndNameContaining(category, name, PageUtil.convertToZeroBasePageWithSort(pageable));
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public ChatRoom save(ChatRoomDto requestDto) {
         ChatRoom chatRoom = requestDto.toEntity();
         return chatRoomRepository.save(chatRoom);

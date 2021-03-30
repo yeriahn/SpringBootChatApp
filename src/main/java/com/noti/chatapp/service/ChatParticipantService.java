@@ -6,6 +6,7 @@ import com.noti.chatapp.dto.chat.ChatParticipantDto;
 import com.noti.chatapp.repository.ChatParticipantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ public class ChatParticipantService {
 
     private final ChatParticipantRepository chatParticipantRepository;
 
+    @Transactional(rollbackFor = Exception.class)
     public ChatParticipant saveParticipant(ChatMessage chatMessage, String sender) {
 
         ChatParticipantDto chatParticipantDto = ChatParticipantDto.builder()
@@ -26,6 +28,7 @@ public class ChatParticipantService {
         return chatParticipantRepository.save(chatParticipantDto.toEntity());
     }
 
+    @Transactional(readOnly = true)
     public List<ChatParticipantDto> findByRoomId(String roomId) {
 
         return chatParticipantRepository.findByRoomId(roomId)
