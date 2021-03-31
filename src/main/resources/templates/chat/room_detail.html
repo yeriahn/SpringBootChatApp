@@ -3,6 +3,7 @@
 <head>
     <div th:replace="/fragments/head.html :: fragment-head"></div>
     <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/chat_detail.js" defer></script>
 </head>
 
 <body>
@@ -53,11 +54,35 @@
         </div>
     </div>
 </section>
+<div th:if="${chatRoomDto.getCreateName().equals(currentMemberId)}">
+    <button id="delete-open" class="btn colorBtn" data-key="color">
+        채팅방 삭제
+    </button>
+</div>
+
+<!--modal-->
+<div class="delete-modal-wrapper" style="display: none;">
+    <div class="modal">
+        <div class="modal-title">채팅방 삭제</div>
+        <form id="room-create-form">
+            <div class="input-group-prepend">
+                <label>채팅방 비밀번호</label><input id="delete-room-pw" type="password" class="modal-input-name" placeholder="채팅방 비밀번호를 입력하세요.">
+            </div>
+            <div class="input-group-append">
+                <button class="btn modal-send-btn" type="button" onclick="Room_detail.deleteRoom();">삭제</button>
+            </div>
+
+
+        </form>
+        <div class="close-wrapper">
+            <button id="delete-close" class="btn modal-close-btn">Close</button>
+        </div>
+    </div>
+</div>
 
 <input id="roomId" type="hidden" th:value="${roomId}"/>
 <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
-
 
 <script type="text/javascript" src="/js/chat.js"></script>
 

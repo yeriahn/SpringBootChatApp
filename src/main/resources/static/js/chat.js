@@ -74,9 +74,7 @@
         let type = data.type;
 
         if(["Leave","newUser","CHAT"].includes(type)) {
-            console.log("???");
             if(["Leave","newUser"].includes(type)) {
-                console.log("???2");
                 // 중복로그인이 발생한 경우 채팅방에 접속되었던 계정 전부 disconnect 처리
                 if("newUser" === type) {
                     if(memberId === data.memberId) {
@@ -157,16 +155,10 @@
      * 유저정보를 오른쪽에 업데이트
      */
     function printParticipants(participantData) {
-        console.log("222");
-        console.log(participantData);
         let participantUsers = $(".participant-section ul.participant-users");
         // 자식노드 전부 삭제 후에 현재 유저를 넣음.
         participantUsers.empty();
         $.each(participantData, function(ind, obj) {
-            console.log("333");
-            console.log(ind);
-            console.log("444");
-            console.log(obj);
             let wrap = $(document.createElement("li")).attr({
                 "class" : "left clearfix"
             });

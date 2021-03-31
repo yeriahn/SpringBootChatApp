@@ -55,8 +55,8 @@ public class ChatRoomService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void deleteByRoomId(String roomId) {
-        chatRoomRepository.deleteByRoomId(roomId);
+    public Long deleteByRoomIdAndRoomPw(ChatRoomDto requestDto) {
+        return chatRoomRepository.deleteByRoomIdAndRoomPw(requestDto.getRoomId(), requestDto.getRoomPw());
     }
 
     

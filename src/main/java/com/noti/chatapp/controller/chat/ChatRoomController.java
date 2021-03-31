@@ -98,10 +98,20 @@ public class ChatRoomController {
 
     @PostMapping(value = "/api/chat/chat-room")
     public @ResponseBody
-    ResponseEntity<ChatRoom> save(@RequestBody ChatRoomDto requestDto) {
+    ResponseEntity<ChatRoom> save(@RequestBody ChatRoomDto requestDto, @AuthenticationPrincipal User user) {
         // TODO: Validation 처리
+        requestDto.setCreateName(user.getUsername());
         ChatRoom save = chatRoomService.save(requestDto);
         return ResponseEntity.ok(save);
+    }
+
+    @DeleteMapping(value = "/api/chat/delete-room")
+    public @ResponseBody
+    ResponseEntity<Long> chatRoomDelete(@RequestBody ChatRoomDto requestDto) {
+        log.info("delete ChatRoomDto :{}",requestDto);
+        long result = chatRoomService.deleteByRoomIdAndRoomPw(requestDto);
+        log.info("delete result :{}",result);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/chat/user")

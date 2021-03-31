@@ -4,15 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.noti.chatapp.domain.chat.ChatRoom;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
+@ToString
 public class ChatRoomDto {
 
     private Long id;
@@ -20,6 +19,8 @@ public class ChatRoomDto {
     private String roomPw;
     private String name;
     private String category;
+    @Setter
+    private String createName;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDate;
@@ -28,11 +29,12 @@ public class ChatRoomDto {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public ChatRoomDto(String roomId, String name, String roomPw, String category) {
+    public ChatRoomDto(String roomId, String name, String roomPw, String category, String createName) {
         this.roomId = roomId;
         this.roomPw = roomPw;
         this.name = name;
         this.category = category;
+        this.createName = createName;
     }
 
     public ChatRoomDto(ChatRoom chatRoom) {
@@ -40,6 +42,7 @@ public class ChatRoomDto {
         this.name = chatRoom.getName();
         this.roomPw = chatRoom.getRoomPw();
         this.category = chatRoom.getCategory();
+        this.createName = chatRoom.getCreateName();
         this.createdDate = chatRoom.getCreatedDate();
         this.modifiedDate = chatRoom.getModifiedDate();
     }
@@ -51,6 +54,7 @@ public class ChatRoomDto {
                 .name(name)
                 .roomPw(roomPw)
                 .category(category)
+                .createName(createName)
                 .build();
     }
 }

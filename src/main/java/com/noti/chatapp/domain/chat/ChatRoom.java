@@ -23,13 +23,15 @@ public class ChatRoom extends BaseTimeEntity {
     private String roomPw;
     private String name;
     private String category;
+    private String createName;
 
     @Builder
-    public ChatRoom(String roomId, String name, String roomPw, String category) {
+    public ChatRoom(String roomId, String name, String roomPw, String category, String createName) {
         this.roomId = roomId;
         this.roomPw = roomPw;
         this.name = name;
         this.category = category;
+        this.createName = createName;
     }
 
 /*    public static ChatRoom create(String name, String category) {

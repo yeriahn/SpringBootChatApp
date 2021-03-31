@@ -9,7 +9,6 @@ const Room = (function () {
     getListRenderAll();
 
     function getListRenderAll(page) {
-        console.log(page);
         const $list = $("#items");
         const $row = $("#chat-room-list-template").find("tr");
         $list.empty();
@@ -23,10 +22,7 @@ const Room = (function () {
             if(Commons.isNotEmpty(data)) {
                 displayItems(data);
                 getPage(data);
-                console.log(data);
-                console.log(data.contents.roomId);
                 //chatrooms = data.contents.roomId;
-                console.log("1111");
                // console.log(chatrooms);
             }else {
                 container.innerHTML = `
@@ -59,17 +55,9 @@ const Room = (function () {
 
         //location.href="/chat/room/detail/"+roomId;
     };
-    const updateRoom = function () {
-        alert("updateRoom");
-    };
-    const deleteRoom = function () {
-        alert("deleteRoom");
-    };
     return {
         getListRenderAll: getListRenderAll,
         createRoom: createRoom,
-        updateRoom: updateRoom,
-        deleteRoom: deleteRoom
     };
 })();
 
