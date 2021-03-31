@@ -79,12 +79,12 @@ public class StompHandler implements ChannelInterceptor {
                         chatParticipantService.deleteById(participantId);
                         chatService.sendChatMessage(chatMessage);
 
-                        long participantCnt = chatParticipantService.countByRoomId(roomId);
+                        /*long participantCnt = chatParticipantService.countByRoomId(roomId);
                         log.info("participantCnt 수 :" +participantCnt);
 
                         if(participantCnt == 0) {
                             chatRoomService.deleteByRoomId(roomId);
-                        }
+                        }*/
                     }
 
 

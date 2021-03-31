@@ -1,16 +1,13 @@
 package com.noti.chatapp.domain.chat;
 
 import com.noti.chatapp.domain.BaseTimeEntity;
+import com.noti.chatapp.util.CryptoConverter;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.UUID;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -21,12 +18,16 @@ public class ChatRoom extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String roomId;
+
+    @Convert(converter = CryptoConverter.class)
+    private String roomPw;
     private String name;
     private String category;
 
     @Builder
-    public ChatRoom(String roomId, String name, String category) {
+    public ChatRoom(String roomId, String name, String roomPw, String category) {
         this.roomId = roomId;
+        this.roomPw = roomPw;
         this.name = name;
         this.category = category;
     }

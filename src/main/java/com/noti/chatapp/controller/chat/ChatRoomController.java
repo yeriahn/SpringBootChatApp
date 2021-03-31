@@ -37,7 +37,7 @@ public class ChatRoomController {
     @GetMapping("/chat/room")
     public String rooms(@AuthenticationPrincipal User user, Map<String, Object> model) {
 
-        model.put("PageDto", new PageDto<>());
+        log.info("/chat/room");
         model.put("currentMemberId", user.getUsername()); //로그인을 통해 인증된 유저 정보 저장
 
         return "/chat/room";

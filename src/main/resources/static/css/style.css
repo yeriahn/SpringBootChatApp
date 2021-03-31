@@ -344,10 +344,16 @@ body {
     text-align: right;
 }
 
-.modal-input {
+.modal-input-name {
     margin-right: 15px;
     height: 30px;
     width: 200px;
+}
+
+.modal-input-pw {
+    margin-right: 15px;
+    height: 30px;
+    width: 100px;
 }
 
 .input-group-prepend {

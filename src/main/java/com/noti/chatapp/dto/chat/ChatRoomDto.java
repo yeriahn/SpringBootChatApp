@@ -17,6 +17,7 @@ public class ChatRoomDto {
 
     private Long id;
     private String roomId;
+    private String roomPw;
     private String name;
     private String category;
 
@@ -27,16 +28,17 @@ public class ChatRoomDto {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public ChatRoomDto(String roomId, String name,String category) {
+    public ChatRoomDto(String roomId, String name, String roomPw, String category) {
         this.roomId = roomId;
+        this.roomPw = roomPw;
         this.name = name;
         this.category = category;
     }
 
     public ChatRoomDto(ChatRoom chatRoom) {
-        this.id = chatRoom.getId();
         this.roomId = chatRoom.getRoomId();
         this.name = chatRoom.getName();
+        this.roomPw = chatRoom.getRoomPw();
         this.category = chatRoom.getCategory();
         this.createdDate = chatRoom.getCreatedDate();
         this.modifiedDate = chatRoom.getModifiedDate();
@@ -47,6 +49,7 @@ public class ChatRoomDto {
         return ChatRoom.builder()
                 .roomId(UUID.randomUUID().toString())
                 .name(name)
+                .roomPw(roomPw)
                 .category(category)
                 .build();
     }

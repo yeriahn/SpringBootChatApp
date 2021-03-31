@@ -43,11 +43,12 @@ const Room = (function () {
     const createRoom = function () {
         //채팅방 이름
         let roomName = document.getElementById('room-name').value;
+        let roomPw = document.getElementById('room-pw').value;
         //채팅방 카테고리
         let categorySelect = document.querySelector('#room-category');
         let roomCategory = categorySelect.options[categorySelect.selectedIndex].value;
 
-        const params = {name: roomName, category: roomCategory};
+        const params = {name: roomName, roomPw: roomPw,category: roomCategory};
         Commons.ajaxPost("/api/chat/chat-room", params, function(resp) {
             getListRenderAll();
         });
