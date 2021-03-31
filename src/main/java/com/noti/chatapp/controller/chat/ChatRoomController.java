@@ -37,7 +37,6 @@ public class ChatRoomController {
     @GetMapping("/chat/room")
     public String rooms(@AuthenticationPrincipal User user, Map<String, Object> model) {
 
-        log.info("/chat/room");
         model.put("currentMemberId", user.getUsername()); //로그인을 통해 인증된 유저 정보 저장
 
         return "/chat/room";
@@ -53,7 +52,6 @@ public class ChatRoomController {
     //채팅방 id별 입장
     @GetMapping("/chat/room/detail/{roomId}")
     public String chatRoomDetail(@AuthenticationPrincipal User user, Model model, @PathVariable String roomId) {
-        log.info("detail roomId : "+roomId);
         ChatRoomDto chatRoomDto = chatRoomService.findByRoomId(roomId);
         model.addAttribute("currentMemberId", user.getUsername());
         model.addAttribute("roomId", roomId);
@@ -108,9 +106,7 @@ public class ChatRoomController {
     @DeleteMapping(value = "/api/chat/delete-room")
     public @ResponseBody
     ResponseEntity<Long> chatRoomDelete(@RequestBody ChatRoomDto requestDto) {
-        log.info("delete ChatRoomDto :{}",requestDto);
         long result = chatRoomService.deleteByRoomIdAndRoomPw(requestDto);
-        log.info("delete result :{}",result);
         return ResponseEntity.ok(result);
     }
 

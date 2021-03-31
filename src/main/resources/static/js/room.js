@@ -22,8 +22,6 @@ const Room = (function () {
             if(Commons.isNotEmpty(data)) {
                 displayItems(data);
                 getPage(data);
-                //chatrooms = data.contents.roomId;
-               // console.log(chatrooms);
             }else {
                 container.innerHTML = `
                     <li class="item">
@@ -47,6 +45,10 @@ const Room = (function () {
         const params = {name: roomName, roomPw: roomPw,category: roomCategory};
         Commons.ajaxPost("/api/chat/chat-room", params, function(resp) {
             getListRenderAll();
+
+            if(resp.roomId != null) {
+                location.href="/chat/room/detail/"+resp.roomId;
+            }
         });
 
         $('#room-category').find('option:first').attr('selected', 'selected');
