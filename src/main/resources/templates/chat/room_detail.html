@@ -54,7 +54,7 @@
         </div>
     </div>
 </section>
-<div th:if="${chatRoomDto.getCreateName().equals(currentMemberId)}">
+<div class="delete-prepend" th:if="${chatRoomDto.getCreateName().equals(currentMemberId)}">
     <button id="delete-open" class="btn colorBtn" data-key="color">
         채팅방 삭제
     </button>

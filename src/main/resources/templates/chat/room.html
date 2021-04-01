@@ -57,10 +57,10 @@
                     <option value="cgShop">쇼핑</option>
                 </select>
                 <div class="input-group-prepend">
-                    <label>채팅방 이름</label><input id="room-name" type="text" class="modal-input-name" placeholder="채팅방 이름을 입력하세요.">
+                    <label>채팅방 이름</label><input id="room-name" type="text" class="modal-input-name" placeholder="채팅방 이름을 입력하세요." required autofocus>
                 </div>
                 <div class="input-group-prepend">
-                    <label>채팅방 비밀번호</label><input id="room-pw" type="password" class="modal-input-pw" placeholder="채팅방 비밀번호를 입력하세요.">
+                    <label>채팅방 비밀번호</label><input id="room-pw" type="password" class="modal-input-pw" placeholder="채팅방 비밀번호를 입력하세요." required>
                 </div>
                 <div class="input-group-append">
                     <button class="btn modal-send-btn" type="button" onclick="Room.createRoom();">등록</button>

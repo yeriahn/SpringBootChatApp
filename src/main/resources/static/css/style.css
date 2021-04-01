@@ -84,15 +84,23 @@ body {
 }
 
 .sections-top {
-    height: 90vh;
+    height: 75vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
+.delete-prepend {
+    width: 1200px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .chat-section {
-    height: 80%;
+    height: 100%;
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -103,7 +111,7 @@ body {
 .participant-section {
     border-left: var(--border-size) solid var(--color-light-grey);
     background-color: white;
-    height: 80%;
+    height: 100%;
     width: 10%;
 }
 
@@ -357,19 +365,27 @@ body {
 }
 
 .modal-input-name {
-    margin-right: 15px;
+    margin-left: 46px;
     height: 30px;
     width: 200px;
 }
 
 .modal-input-pw {
-    margin-right: 15px;
+    margin-left: 15px;
     height: 30px;
-    width: 100px;
+    width: 200px;
 }
 
 .input-group-prepend {
     display: flex;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.input-group-append {
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -424,4 +440,8 @@ select {
 
 .create-room-section {
     height: 50px;
+}
+
+.primary-font {
+    margin-right: 5px;
 }

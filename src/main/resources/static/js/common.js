@@ -104,6 +104,26 @@ let Commons = (function () {
         return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
     }
 
+    let markingErrorField = function (response) {
+        const errorFields = response.responseJSON.errors;
+
+        if(!errorFields){
+            alert(response.response.message);
+            return;
+        }
+
+        let $field, error;
+        for(let i=0, length = errorFields.length; i<length;i++){
+            error = errorFields[i];
+            $field = $('#'+error['field']);
+
+            if($field && $field.length > 0){
+                $field.siblings('.error-message').remove();
+                $field.after('<span class="error-message text-muted taxt-small text-danger">'+error.defaultMessage+'</span>');
+            }
+        }
+    };
+
     return {
         ajaxGet: ajaxGet,
         ajaxPost: ajaxPost,
