@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .frameOptions().sameOrigin() // SockJS는 기본적으로 HTML iframe 요소를 통한 전송을 허용하지 않도록 설정되는데 해당 내용을 해제한다.
             .and()
                 .authorizeRequests()
-                .antMatchers("/setting/regMember", "/setting/loginMember", "/setting/loginMember/fail").permitAll()
+                .antMatchers("/setting/regMember", "/setting/loginMember", "/setting/loginMember/fail", "/error/*").permitAll()
                 .antMatchers("/h2/**").permitAll()
                 .anyRequest().authenticated() //그 외의 모든 요청은 인증된 사용자만 접근가능
             .and()

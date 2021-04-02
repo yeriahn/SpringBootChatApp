@@ -445,3 +445,16 @@ select {
 .primary-font {
     margin-right: 5px;
 }
+
+.chat-error-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-error-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

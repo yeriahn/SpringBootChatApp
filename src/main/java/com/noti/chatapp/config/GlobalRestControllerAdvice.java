@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -21,14 +20,14 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @RestControllerAdvice
-public class JsonControllerAdvice extends ResponseEntityExceptionHandler {
+public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ChatRoomNotFoundException.class)
+    /*@ExceptionHandler(ChatRoomNotFoundException.class)
     public ResponseEntity<Object> chatRoomNotFoundException(HttpServletRequest req, ChatRoomNotFoundException e) {
         ResultCodeVo resultCodeVo = new ResultCodeVo();
         resultCodeVo.setCmmResultCode(SvcErrorCode.NOTFOUND_ROOMID);
         return new ResponseEntity<>(resultCodeVo, HttpStatus.OK);
-    }
+    }*/
 
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<Object> nullPointerException(HttpServletRequest req, NullPointerException e) {

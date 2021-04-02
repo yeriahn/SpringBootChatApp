@@ -53,10 +53,14 @@ public class ChatRoomController {
     //채팅방 id별 입장
     @GetMapping("/chat/room/detail/{roomId}")
     public String chatRoomDetail(@AuthenticationPrincipal User user, Model model, @PathVariable String roomId) {
+        log.info("??11");
         ChatRoomDto chatRoomDto = chatRoomService.findByRoomId(roomId);
+
         model.addAttribute("currentMemberId", user.getUsername());
         model.addAttribute("roomId", roomId);
         model.addAttribute("chatRoomDto", chatRoomDto);
+
+        log.info("??? : {}", chatRoomDto);
 
         return "/chat/room_detail";
     }
@@ -117,5 +121,11 @@ public class ChatRoomController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication(); //현재 세션 사용자의 정보를 알아내는 방법
         String name = auth.getName();
         return LoginDto.builder().name(name).token(jwtTokenProvider.generateToken(name)).build();
+    }
+
+    //채팅방 입장 화면
+    @GetMapping("/error/room_failed")
+    public String roomFailed() {
+        return "/error/room_failed";
     }
 }
