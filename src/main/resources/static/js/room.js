@@ -39,7 +39,8 @@ const Room = (function () {
         let roomName = document.getElementById('room-name').value;
         let roomPw = document.getElementById('room-pw').value;
 
-        if(chatRoomValidation(roomName, roomPw) == 'exit') return;
+        if(checkValidation(roomName) == 'exit') return;
+        if(checkValidation(roomPw) == 'exit') return;
 
         //채팅방 카테고리
         let categorySelect = document.querySelector('#room-category');
@@ -131,46 +132,6 @@ function getPage(data) {
 
     $("#paginationBox").html(block);
 
-}
-
-function chatRoomValidation(roomName, roomPw)  {
-    let specialCheck = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
-
-    if(roomName == null || roomName === '') {
-        swal({
-            title: 'Fail', /*상단 타이틀*/
-            text: '채팅방 이름은 필수 입력 사항입니다.', /*내용*/
-            icon: 'error' /*아이콘 타입*/
-        });
-        document.getElementById('room-name').focus();
-        return 'exit'
-    }else if(roomName.search(/\s/) != -1 || specialCheck.test(roomName)) {
-        swal({
-            title: 'Fail', /*상단 타이틀*/
-            text: '채팅방 이름은 공백 및 특수문자를 포함할 수 없습니다.', /*내용*/
-            icon: 'error' /*아이콘 타입*/
-        });
-        document.getElementById('room-name').focus();
-        return 'exit'
-    }
-
-    if(roomPw == null || roomPw == '') {
-        swal({
-            title: 'Fail', /*상단 타이틀*/
-            text: '채팅방 비밀번호는 필수 입력 사항입니다.', /*내용*/
-            icon: 'error' /*아이콘 타입*/
-        });
-        document.getElementById('room-pw').focus();
-        return 'exit'
-    }else if(roomPw.search(/\s/) != -1 || specialCheck.test(roomPw)) {
-        swal({
-            title: 'Fail', /*상단 타이틀*/
-            text: '채팅방 비밀번호는 공백 및 특수문자를 포함할 수 없습니다.', /*내용*/
-            icon: 'error' /*아이콘 타입*/
-        });
-        document.getElementById('room-pw').focus();
-        return 'exit'
-    }
 }
 
 //modal

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -96,7 +97,7 @@ public class ChatRoomController {
 
     @PostMapping(value = "/api/chat/chat-room")
     public @ResponseBody
-    ResponseEntity<ChatRoom> save(@RequestBody ChatRoomDto requestDto, @AuthenticationPrincipal User user) {
+    ResponseEntity<ChatRoom> save(@Valid @RequestBody ChatRoomDto requestDto, @AuthenticationPrincipal User user) {
         // TODO: Validation 처리
         requestDto.setCreateName(user.getUsername());
         ChatRoom save = chatRoomService.save(requestDto);
@@ -105,7 +106,7 @@ public class ChatRoomController {
 
     @DeleteMapping(value = "/api/chat/delete-room")
     public @ResponseBody
-    ResponseEntity<Long> chatRoomDelete(@RequestBody ChatRoomDto requestDto) {
+    ResponseEntity<Long> chatRoomDelete(@Valid @RequestBody ChatRoomDto requestDto) {
         long result = chatRoomService.deleteByRoomIdAndRoomPw(requestDto);
         return ResponseEntity.ok(result);
     }

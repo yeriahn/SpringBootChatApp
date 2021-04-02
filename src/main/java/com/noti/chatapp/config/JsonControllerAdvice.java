@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 public class JsonControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ChatRoomNotFoundException.class)
-    public ResponseEntity<Object> nullPointerException(HttpServletRequest req, ChatRoomNotFoundException e) {
+    public ResponseEntity<Object> chatRoomNotFoundException(HttpServletRequest req, ChatRoomNotFoundException e) {
         ResultCodeVo resultCodeVo = new ResultCodeVo();
         resultCodeVo.setCmmResultCode(SvcErrorCode.NOTFOUND_ROOMID);
         return new ResponseEntity<>(resultCodeVo, HttpStatus.OK);

@@ -2,7 +2,8 @@ const registerMember = function () {
     let memberId = document.getElementById('memberId').value;
     let memberPw = document.getElementById('memberPw').value;
 
-    if(chatRoomValidation(memberId, memberPw) == 'exit') return;
+    if(checkValidation(memberId) == 'exit') return;
+    if(checkValidation(memberPw) == 'exit') return;
 
     const params = {memberId: memberId, memberPw: memberPw};
     Commons.ajaxPost("/setting/regMember", params, function(resp) {
@@ -24,44 +25,3 @@ const registerMember = function () {
         }
     });
 };
-
-function chatRoomValidation(memberId, memberPw)  {
-    let specialCheck = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
-
-    if(memberId == null || memberId === '') {
-        swal({
-            title: 'Fail', /*상단 타이틀*/
-            text: '아이디는 필수 입력 사항입니다.', /*내용*/
-            icon: 'error' /*아이콘 타입*/
-        });
-        document.getElementById('room-name').focus();
-        return 'exit'
-    }else if(memberId.search(/\s/) != -1 || specialCheck.test(memberId)) {
-        swal({
-            title: 'Fail', /*상단 타이틀*/
-            text: '아이디는 공백 및 특수문자를 포함할 수 없습니다.', /*내용*/
-            icon: 'error' /*아이콘 타입*/
-        });
-        document.getElementById('room-name').focus();
-        return 'exit'
-    }
-
-    if(memberPw == null || memberPw == '') {
-        swal({
-            title: 'Fail', /*상단 타이틀*/
-            text: '비밀번호는 필수 입력 사항입니다.', /*내용*/
-            icon: 'error' /*아이콘 타입*/
-        });
-        document.getElementById('room-pw').focus();
-        return 'exit'
-    }else if(memberPw.search(/\s/) != -1 || specialCheck.test(memberPw)) {
-        swal({
-            title: 'Fail', /*상단 타이틀*/
-            text: '비밀번호는 공백 및 특수문자를 포함할 수 없습니다.', /*내용*/
-            icon: 'error' /*아이콘 타입*/
-        });
-        document.getElementById('room-pw').focus();
-        return 'exit'
-    }
-
-}

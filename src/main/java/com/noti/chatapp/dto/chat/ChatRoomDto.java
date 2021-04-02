@@ -1,11 +1,10 @@
 package com.noti.chatapp.dto.chat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.noti.chatapp.domain.chat.ChatRoom;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -14,8 +13,8 @@ import java.util.UUID;
 @ToString
 public class ChatRoomDto {
 
-    private Long id;
     private String roomId;
+    @NotBlank
     private String roomPw;
     private String name;
     private String category;

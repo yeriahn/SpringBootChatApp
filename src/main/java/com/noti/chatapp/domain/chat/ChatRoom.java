@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
@@ -17,12 +18,19 @@ public class ChatRoom extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private String roomId;
 
+    @NotNull
     @Convert(converter = CryptoConverter.class)
     private String roomPw;
+
+    @NotNull
     private String name;
+
     private String category;
+
     private String createName;
 
     @Builder

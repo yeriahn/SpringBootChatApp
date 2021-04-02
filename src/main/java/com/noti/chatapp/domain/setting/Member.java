@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
@@ -19,10 +20,11 @@ public class Member extends BaseTimeEntity implements Serializable {
     @Column(nullable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @NotNull
+    @Column(unique = true)
     private String memberId;
 
-    @Column(nullable = false)
+    @NotNull
     private String memberPw;
 
     @Builder
