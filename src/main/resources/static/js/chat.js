@@ -14,8 +14,7 @@
         stompClient = Stomp.over(socket);
 
         Commons.ajaxGet("/chat/user", function(data) {
-            token = data.token;
-            stompClient.connect({"token": token}, connectionSuccess, connectionClose);
+            stompClient.connect({}, connectionSuccess, connectionClose);
         })
 
 
@@ -37,8 +36,7 @@
 
     function connectionSuccess() {
         stompClient.subscribe('/topic/chatting.'+roomId, onMessageReceived);
-
-        stompClient.send("/app/"+roomId+"/chat.newUser", {"token": token}, JSON.stringify({
+        stompClient.send("/app/"+roomId+"/chat.newUser", {}, JSON.stringify({
             roomId : roomId,
             sender : memberId,
             type : 'newUser'
@@ -62,7 +60,7 @@
                 type : 'CHAT'
             };
 
-            stompClient.send("/app/"+roomId+"/chat.sendMessage", {"token": token}, JSON
+            stompClient.send("/app/"+roomId+"/chat.sendMessage", {}, JSON
                     .stringify(chatMessage));
             btnInput.val('');
         }
@@ -87,7 +85,7 @@
                     }
                 }
                 // 채팅방 인원 정보 갱신.
-                stompClient.send("/app/"+roomId+"/chat.callParticipants", {"token": token}, JSON.stringify({}))
+                stompClient.send("/app/"+roomId+"/chat.callParticipants", {}, JSON.stringify({}))
             }
 
             memberId =  data.sender;

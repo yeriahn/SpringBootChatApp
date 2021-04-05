@@ -49,6 +49,7 @@ public class MemberController {
 
     @GetMapping("/loginMember")
     public String loginMemberForm(Principal principal) {
+        log.info("principal :"+principal);
         if(principal != null) {
             return "redirect:/chat/room";
         }

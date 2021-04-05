@@ -14,8 +14,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -36,9 +39,9 @@ public class ChatController {
      * @return
      */
     @MessageMapping("/{roomId}/chat.callParticipants")
-    public void callParticipants(@DestinationVariable String roomId, @Header("token") String token) {
+    public void callParticipants(@DestinationVariable String roomId, @AuthenticationPrincipal Principal principal) {
 
-        String sender = jwtTokenProvider.getUserNameFromJwt(token);
+        String sender = principal.getName();
 
         List<ChatParticipantDto> chatParticipantDtos = chatParticipantService.findByRoomId(roomId);
 
@@ -54,9 +57,9 @@ public class ChatController {
      * @return
      */
     @MessageMapping("/{roomId}/chat.sendMessage")
-    public void sendMessage(@Payload ChatMessage chatMessage, @Header("token") String token) {
+    public void sendMessage(@Payload ChatMessage chatMessage, @AuthenticationPrincipal Principal principal) {
 
-        String sender = jwtTokenProvider.getUserNameFromJwt(token);
+        String sender = principal.getName();
 
         log.info("send message " + chatMessage.getRoomId() + " from" + sender);
         chatMessage.setSender(sender);
@@ -72,10 +75,12 @@ public class ChatController {
      * @return
      */
     @MessageMapping("/{roomId}/chat.newUser")
-    public void addUser(@Payload ChatMessage chatMessage, @Header("token") String token
-            , SimpMessageHeaderAccessor headerAccessor) {
+    public void addUser(@Payload ChatMessage chatMessage
+            , SimpMessageHeaderAccessor headerAccessor, @AuthenticationPrincipal Principal principal) {
 
-        String sender = jwtTokenProvider.getUserNameFromJwt(token);
+        log.info("chat.newUser userDetails : {} ", principal.getName());
+
+        String sender = principal.getName();
 
         log.info("chat.newUser roomId : {} ", chatMessage.getRoomId());
         log.info("chat.newUser memberId : {} ", sender);

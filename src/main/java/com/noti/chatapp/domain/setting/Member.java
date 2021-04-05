@@ -1,17 +1,14 @@
 package com.noti.chatapp.domain.setting;
 
 import com.noti.chatapp.domain.BaseTimeEntity;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Entity
 public class Member extends BaseTimeEntity implements Serializable {
 
@@ -21,6 +18,7 @@ public class Member extends BaseTimeEntity implements Serializable {
     private Long id;
 
     @NotNull
+    @Setter
     @Column(unique = true)
     private String memberId;
 

@@ -7,12 +7,12 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 
 @Getter
+@Setter
 public class MemberDto {
 
     @NotBlank
     private String memberId;
 
-    @Setter
     @NotBlank
     private String memberPw;
 
@@ -20,5 +20,9 @@ public class MemberDto {
     public MemberDto(String memberId, String memberPw) {
         this.memberId = memberId;
         this.memberPw = memberPw;
+    }
+
+    public MemberDto() {
+
     }
 }

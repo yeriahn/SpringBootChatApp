@@ -29,6 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CustomFailureHandler customFailureHandler;
 
+    private final JwtRequestFilter jwtRequestFilter;
+
     @Override
     // 정적 자원에 대해서는 Security 설정을 적용하지 않음
     public void configure(WebSecurity web) throws Exception {
@@ -67,7 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/setting/loginMember")
             .and()
-                .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 

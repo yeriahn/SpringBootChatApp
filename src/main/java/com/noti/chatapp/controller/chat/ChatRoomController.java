@@ -17,11 +17,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,29 +36,47 @@ public class ChatRoomController {
     private final JwtTokenProvider jwtTokenProvider;
     private final ChatRoomService chatRoomService;
 
+    public String getCurrentMemberId () {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        return username;
+    }
+
     //채팅 리스트 화면
     @GetMapping("/chat/room")
     public String rooms(Map<String, Object> model) {
 
-        //model.put("currentMemberId", user.getUsername()); //로그인을 통해 인증된 유저 정보 저장
+        String currentMemberId = getCurrentMemberId();
+        log.info("currentMemberId : {}",currentMemberId);
+        model.put("currentMemberId", currentMemberId); //로그인을 통해 인증된 유저 정보 저장
 
         return "/chat/room";
     }
 
     //채팅방 입장 화면
     @GetMapping("/chat/room/detail")
-    public String roomDetail(@AuthenticationPrincipal User user, Model model) {
-        model.addAttribute("currentMemberId", user.getUsername());
+    public String roomDetail(Model model) {
+        String currentMemberId = getCurrentMemberId();
+        model.addAttribute("currentMemberId", currentMemberId);
         return "chat/room_detail";
     }
 
     //채팅방 id별 입장
     @GetMapping("/chat/room/detail/{roomId}")
-    public String chatRoomDetail(@AuthenticationPrincipal User user, Model model, @PathVariable String roomId) {
+    public String chatRoomDetail(Model model, @PathVariable String roomId) {
         log.info("??11");
         ChatRoomDto chatRoomDto = chatRoomService.findByRoomId(roomId);
 
-        model.addAttribute("currentMemberId", user.getUsername());
+        String currentMemberId = getCurrentMemberId();
+
+        model.addAttribute("currentMemberId", currentMemberId);
         model.addAttribute("roomId", roomId);
         model.addAttribute("chatRoomDto", chatRoomDto);
 
@@ -101,9 +121,11 @@ public class ChatRoomController {
 
     @PostMapping(value = "/api/chat/chat-room")
     public @ResponseBody
-    ResponseEntity<ChatRoom> save(@Valid @RequestBody ChatRoomDto requestDto, @AuthenticationPrincipal User user) {
+    ResponseEntity<ChatRoom> save(@Valid @RequestBody ChatRoomDto requestDto) {
         // TODO: Validation 처리
-        requestDto.setCreateName(user.getUsername());
+        String currentMemberId = getCurrentMemberId();
+
+        requestDto.setCreateName(currentMemberId);
         ChatRoom save = chatRoomService.save(requestDto);
         return ResponseEntity.ok(save);
     }
@@ -118,9 +140,8 @@ public class ChatRoomController {
     @GetMapping("/chat/user")
     @ResponseBody
     public LoginDto getUserInfo() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); //현재 세션 사용자의 정보를 알아내는 방법
-        String name = auth.getName();
-        return LoginDto.builder().name(name).token(jwtTokenProvider.generateToken(name)).build();
+        String name = getCurrentMemberId();
+        return LoginDto.builder().name(name).build();
     }
 
     //채팅방 입장 화면

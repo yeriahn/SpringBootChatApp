@@ -43,10 +43,10 @@ public class StompHandler implements ChannelInterceptor {
                     log.debug("Login Id : {}", accessor.getLogin());
                     log.debug("User Token : {}", accessor.getPasscode());
 
-                    String jwtToken = accessor.getFirstNativeHeader("token");
+                    /*String jwtToken = accessor.getFirstNativeHeader("token");
                     log.info("CONNECT jwtToken {}", jwtToken);
                     //Header의 jwt token 검증
-                    jwtTokenProvider.validateToken(jwtToken);
+                    jwtTokenProvider.validateToken(jwtToken);*/
                     break;
                 case CONNECTED:
                     break;
