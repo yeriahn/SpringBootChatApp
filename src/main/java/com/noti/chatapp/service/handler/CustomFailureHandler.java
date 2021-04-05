@@ -19,7 +19,7 @@ public class CustomFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-
+        log.info("CustomFailureHandler =====");
         String loginFailMsg = exception.getMessage();
 
         if (exception instanceof AuthenticationServiceException) {
@@ -28,6 +28,8 @@ public class CustomFailureHandler implements AuthenticationFailureHandler {
             loginFailMsg = "아이디 혹은 비밀번호가 맞지 않습니다.";
         } else if(exception instanceof InternalAuthenticationServiceException) {
             loginFailMsg = "내부적으로 발생한 시스템 문제로 인해 인증 요청을 처리할 수 없습니다.";
+        }else {
+            loginFailMsg = "계정을 찾을 수 없습니다.";
         }
 
         log.info("loginFailMsg :"+loginFailMsg);

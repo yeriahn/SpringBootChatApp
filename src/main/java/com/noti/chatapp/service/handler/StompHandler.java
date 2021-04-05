@@ -1,11 +1,10 @@
 package com.noti.chatapp.service.handler;
 
 import com.noti.chatapp.dto.chat.ChatMessage;
-import com.noti.chatapp.repository.ChatParticipantRepository;
 import com.noti.chatapp.service.ChatParticipantService;
 import com.noti.chatapp.service.ChatRoomService;
 import com.noti.chatapp.service.ChatService;
-import com.noti.chatapp.service.jwt.JwtTokenProvider;
+import com.noti.chatapp.config.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;

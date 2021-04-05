@@ -1,9 +1,16 @@
 package com.noti.chatapp.service.handler;
 
+import com.noti.chatapp.config.security.JwtTokenProvider;
+import com.noti.chatapp.domain.setting.Member;
+import com.noti.chatapp.dto.MemberDetailsDto;
+import com.noti.chatapp.dto.setting.MemberDto;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
@@ -14,53 +21,22 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
-public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
+public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        log.info("CustomLoginSuccessHandler ====");
+        Member member = ((MemberDetailsDto)authentication.getPrincipal()).getMember();
+        String token = jwtTokenProvider.generateJwtToken(member);
+        log.info("CustomLoginSuccessHandler token : {}",token);
+        response.addHeader("Authorization", "Bearer " + token);
+        response.sendRedirect("/chat/room");
+        //request.getRequestDispatcher("/chat/room").forward(request, response);
 
-        // IP, 세션 ID
-        WebAuthenticationDetails web = (WebAuthenticationDetails) authentication.getDetails();
-        log.info("IP : " + web.getRemoteAddress());
-        log.info("Session ID : " + web.getSessionId());
 
-        // 인증 ID
-        log.info("name : " + authentication.getName());
-
-        // 권한 리스트
-        List<GrantedAuthority> authList = (List<GrantedAuthority>) authentication.getAuthorities();
-        log.info("권한 : ");
-        for(int i = 0; i< authList.size(); i++) {
-            log.info(authList.get(i).getAuthority() + " ");
-        }
-
-        // 디폴트 URI
-        String uri = "/chat/room";
-
-        /*
-        // 접근 권한이 없는 페이지 요청 → 로그인 화면(인터셉트)의 경우 데이터 get
-        RequestCache requestCache = new HttpSessionRequestCache();
-        SavedRequest savedRequest = requestCache.getRequest(request, response);
-
-        // 로그인 버튼 눌러 접속했을 경우의 데이터 get
-        String prevPage = (String) request.getSession().getAttribute("prevPage");
-
-        if (prevPage != null) {
-            request.getSession().removeAttribute("prevPage");
-        }
-
-        // null이 아니라면 강제 인터셉트 당했다는 것
-        if (savedRequest != null) {
-            uri = savedRequest.getRedirectUrl();
-
-            // ""가 아니라면 직접 로그인 페이지로 접속한 것
-        } else if (prevPage != null && !prevPage.equals("")) {
-            uri = prevPage;
-        }
-        */
-
-        // 세 가지 케이스에 따른 URI 주소로 리다이렉트
-        response.sendRedirect(uri);
     }
 }

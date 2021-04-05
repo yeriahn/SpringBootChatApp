@@ -5,7 +5,7 @@ import com.noti.chatapp.dto.chat.ChatMessage;
 import com.noti.chatapp.dto.chat.ChatParticipantDto;
 import com.noti.chatapp.service.ChatParticipantService;
 import com.noti.chatapp.service.ChatService;
-import com.noti.chatapp.service.jwt.JwtTokenProvider;
+import com.noti.chatapp.config.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -17,7 +17,6 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor

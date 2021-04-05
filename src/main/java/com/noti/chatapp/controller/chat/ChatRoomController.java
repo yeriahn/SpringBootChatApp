@@ -5,7 +5,7 @@ import com.noti.chatapp.dto.PageDto;
 import com.noti.chatapp.dto.chat.ChatRoomDto;
 import com.noti.chatapp.dto.LoginDto;
 import com.noti.chatapp.service.ChatRoomService;
-import com.noti.chatapp.service.jwt.JwtTokenProvider;
+import com.noti.chatapp.config.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -36,9 +36,9 @@ public class ChatRoomController {
 
     //채팅 리스트 화면
     @GetMapping("/chat/room")
-    public String rooms(@AuthenticationPrincipal User user, Map<String, Object> model) {
+    public String rooms(Map<String, Object> model) {
 
-        model.put("currentMemberId", user.getUsername()); //로그인을 통해 인증된 유저 정보 저장
+        //model.put("currentMemberId", user.getUsername()); //로그인을 통해 인증된 유저 정보 저장
 
         return "/chat/room";
     }
