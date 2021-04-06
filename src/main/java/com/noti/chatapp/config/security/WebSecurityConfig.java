@@ -2,6 +2,7 @@ package com.noti.chatapp.config.security;
 
 import com.noti.chatapp.service.handler.CustomLoginSuccessHandler;
 import com.noti.chatapp.service.handler.CustomFailureHandler;
+import com.noti.chatapp.service.handler.CustomLogoutHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtRequestFilter jwtRequestFilter;
 
+    private final CustomLogoutHandler customLogoutHandler;
+
     @Override
     // 정적 자원에 대해서는 Security 설정을 적용하지 않음
     public void configure(WebSecurity web) throws Exception {
@@ -47,11 +50,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //// 토큰을 활용하면 세션이 필요 없으므로 STATELESS로 설정하여 Session을 사용하지 않는다.
             .and()
                 .authorizeRequests()
-                //.antMatchers("/setting/regMember", "/setting/loginMember", "/setting/loginMember/fail", "/error/*").permitAll()
+                .antMatchers("/setting/regMember", "/setting/loginMember", "/setting/loginMember/fail", "/error/*").permitAll()
                 //.antMatchers("/h2/**").permitAll()
-                //.anyRequest().authenticated() //그 외의 모든 요청은 인증된 사용자만 접근가능
+                .anyRequest().authenticated() //그 외의 모든 요청은 인증된 사용자만 접근가능
         // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
-                .anyRequest().permitAll()
+                //.anyRequest().permitAll()
             .and()
                 .formLogin() // 권한없이 페이지 접근하면 로그인 페이지로 이동한다.
                 .loginPage("/setting/loginMember")
@@ -68,6 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .logout()
                 .logoutSuccessUrl("/setting/loginMember")
+                .deleteCookies("JSESSIONID", "remember-me")      // 로그아웃 후 쿠키 삭제
+                .addLogoutHandler(customLogoutHandler)               // 로그아웃 핸들러
             .and()
                 .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
