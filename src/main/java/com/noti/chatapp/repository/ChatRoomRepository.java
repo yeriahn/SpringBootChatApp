@@ -15,5 +15,5 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
 
     Optional<ChatRoom> findByRoomId(String roomId);
 
-    long deleteByRoomIdAndRoomPw(String roomId, String roomPw);
+    Integer deleteByRoomIdAndRoomPw(String roomId, String roomPw);
 }

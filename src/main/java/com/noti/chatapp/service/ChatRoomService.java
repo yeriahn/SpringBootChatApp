@@ -57,14 +57,23 @@ public class ChatRoomService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Long deleteByRoomIdAndRoomPw(ChatRoomDto requestDto) {
-        return chatRoomRepository.deleteByRoomIdAndRoomPw(requestDto.getRoomId(), requestDto.getRoomPw());
+    public Integer deleteByRoomIdAndRoomPw(ChatRoomDto requestDto) {
+
+        int result = chatRoomRepository.deleteByRoomIdAndRoomPw(requestDto.getRoomId(), requestDto.getRoomPw());
+
+        log.info("deleteByRoomIdAndRoomPw result : {}",result); //성공 시 1 반환
+
+        if(result == 1) {
+            chatParticipantService.deleteByRoomId(requestDto.getRoomId());
+        }
+
+        return result;
     }
 
     @Transactional(readOnly = true)
     public void joinCount(String roomId) {
 
-        long participantCount = chatParticipantService.countByRoomId(roomId);
+        int participantCount = chatParticipantService.countByRoomId(roomId);
 
         if(participantCount >= 10) {
             throw new ParticipantCountException(roomId);

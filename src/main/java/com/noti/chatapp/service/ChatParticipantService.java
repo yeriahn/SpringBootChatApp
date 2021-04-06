@@ -17,6 +17,18 @@ public class ChatParticipantService {
 
     private final ChatParticipantRepository chatParticipantRepository;
 
+    @Transactional(readOnly = true)
+    public Integer countByRoomId(String roomId) {
+        return chatParticipantRepository.countByRoomId(roomId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ChatParticipantDto> findByRoomId(String roomId) {
+
+        return chatParticipantRepository.findByRoomId(roomId)
+                .stream().map(ChatParticipantDto::new).collect(Collectors.toList());
+    }
+
     @Transactional(rollbackFor = Exception.class)
     public ChatParticipant saveParticipant(ChatMessage chatMessage, String sender) {
 
@@ -28,20 +40,13 @@ public class ChatParticipantService {
         return chatParticipantRepository.save(chatParticipantDto.toEntity());
     }
 
-    @Transactional(readOnly = true)
-    public List<ChatParticipantDto> findByRoomId(String roomId) {
-
-        return chatParticipantRepository.findByRoomId(roomId)
-                .stream().map(ChatParticipantDto::new).collect(Collectors.toList());
-    }
-
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(Long participantId) {
         chatParticipantRepository.deleteById(participantId);
     }
 
-    @Transactional(readOnly = true)
-    public long countByRoomId(String roomId) {
-        return chatParticipantRepository.countByRoomId(roomId);
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteByRoomId(String roomId) {
+        chatParticipantRepository.deleteByRoomId(roomId);
     }
 }

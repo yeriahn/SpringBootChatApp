@@ -130,8 +130,8 @@ public class ChatRoomController {
 
     @DeleteMapping(value = "/api/chat/delete-room")
     public @ResponseBody
-    ResponseEntity<Long> chatRoomDelete(@Valid @RequestBody ChatRoomDto requestDto) {
-        long result = chatRoomService.deleteByRoomIdAndRoomPw(requestDto);
+    ResponseEntity<Integer> chatRoomDelete(@Valid @RequestBody ChatRoomDto requestDto) {
+        int result = chatRoomService.deleteByRoomIdAndRoomPw(requestDto);
         return ResponseEntity.ok(result);
     }
 

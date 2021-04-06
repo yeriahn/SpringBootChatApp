@@ -8,7 +8,7 @@ import java.util.List;
 public interface ChatParticipantRepository extends JpaRepository<ChatParticipant, Long> {
     List<ChatParticipant> findByRoomId(String roomId);
 
-    void deleteByMemberId(String memberId);
+    void deleteByRoomId(String roomId);
 
-    long countByRoomId(String roomId);
+    Integer countByRoomId(String roomId);
 }
