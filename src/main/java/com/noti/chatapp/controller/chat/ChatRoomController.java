@@ -23,7 +23,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,7 +32,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ChatRoomController {
 
-    private final JwtTokenProvider jwtTokenProvider;
     private final ChatRoomService chatRoomService;
 
     public String getCurrentMemberId () {
@@ -73,7 +71,7 @@ public class ChatRoomController {
     public String chatRoomDetail(Model model, @PathVariable String roomId) {
         log.info("??11");
         ChatRoomDto chatRoomDto = chatRoomService.findByRoomId(roomId);
-
+        chatRoomService.joinCount(roomId);
         String currentMemberId = getCurrentMemberId();
 
         model.addAttribute("currentMemberId", currentMemberId);
@@ -148,5 +146,11 @@ public class ChatRoomController {
     @GetMapping("/error/room_failed")
     public String roomFailed() {
         return "/error/room_failed";
+    }
+
+    //채팅방 입장 화면
+    @GetMapping("/error/participant_join_failed")
+    public String participantJoinFailed() {
+        return "/error/participant_join_failed";
     }
 }

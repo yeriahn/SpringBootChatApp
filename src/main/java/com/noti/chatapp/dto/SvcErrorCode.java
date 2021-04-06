@@ -19,8 +19,9 @@ public enum SvcErrorCode {
     SERIALIZE_ERROR("4008", "Serialization fail"),
     /* 5xxx */
     NOTFOUND_ROOMID("5001", "채팅방이 존재하지 않습니다."),
-    NOTFOUND_USER("5001", "등록된 아이디가 없습니다. 다시 한번 확인 하여주세요."),
-    DUPLICATED_ID_CREATE("5007", "중복된 ID 생성 시도"),
+    NOTFOUND_USER("5002", "등록된 아이디가 없습니다. 다시 한번 확인 하여주세요."),
+    DUPLICATED_ID_CREATE("5003", "중복된 ID 생성 시도"),
+    PARTICIPANT_EXCESS_COUNT("5004", "채팅방은 10명까지만 입장 가능합니다."),
     /* 6xxx */
     REDIS_SUBSCRIBER_FAIL("6001", "Redis subscriber 없음"),
     REDIS_CONNECT_FAIL("6002", "Redis connect error"),

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>ChatRoom Search Failed</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/sweetalert.min.js" defer></script>
+</head>
+
+<body class="error-body">
+<input id="chat-error" type="hidden" th:value="${resultCodeVo.getResultMessage()}">
+
+<script>
+    window.onload = function () {
+        let chatError = document.getElementById('chat-error').value;
+
+        swal({
+            title: 'Fail', /*상단 타이틀*/
+            text: chatError,
+            icon: 'error' /*아이콘 타입*/,
+        }).then((result) => {
+            if(result){
+                location.href='/chat/room';
+            }
+        });
+    }
+</script>
+</body>
+</html>

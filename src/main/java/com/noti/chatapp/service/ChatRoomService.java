@@ -3,6 +3,7 @@ package com.noti.chatapp.service;
 import com.noti.chatapp.domain.chat.ChatRoom;
 import com.noti.chatapp.dto.chat.ChatRoomDto;
 import com.noti.chatapp.exception.ChatRoomNotFoundException;
+import com.noti.chatapp.exception.ParticipantCountException;
 import com.noti.chatapp.repository.ChatRoomRepository;
 import com.noti.chatapp.util.PageUtil;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
+    private final ChatParticipantService chatParticipantService;
 
     @Transactional(readOnly = true)
     public ChatRoomDto findByRoomId(String roomId) {
@@ -57,6 +59,16 @@ public class ChatRoomService {
     @Transactional(rollbackFor = Exception.class)
     public Long deleteByRoomIdAndRoomPw(ChatRoomDto requestDto) {
         return chatRoomRepository.deleteByRoomIdAndRoomPw(requestDto.getRoomId(), requestDto.getRoomPw());
+    }
+
+    @Transactional(readOnly = true)
+    public void joinCount(String roomId) {
+
+        long participantCount = chatParticipantService.countByRoomId(roomId);
+
+        if(participantCount >= 10) {
+            throw new ParticipantCountException(roomId);
+        }
     }
 
     

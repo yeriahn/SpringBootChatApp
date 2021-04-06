@@ -446,15 +446,8 @@ select {
     margin-right: 5px;
 }
 
-.chat-error-body {
+.error-body {
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.chat-error-section {
-    display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
