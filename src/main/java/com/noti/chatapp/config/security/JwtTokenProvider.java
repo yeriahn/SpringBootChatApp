@@ -106,7 +106,6 @@ public class JwtTokenProvider {
      * Jwt Token을 복호화 하여 이름을 얻는다.
      */
     public String getUserNameFromJwt(String jwt) {
-        log.info("getUserNameFromJwt : {}",getClaims(jwt).getBody().getId());
         return getClaims(jwt).getBody().getId();
     }
 
@@ -126,7 +125,6 @@ public class JwtTokenProvider {
 
     private Jws<Claims> getClaims(String jwt) {
         try {
-            log.info("getClaims : "+Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwt));
             return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwt);
         } catch (SignatureException ex) {
             log.error("Invalid JWT signature");
@@ -149,9 +147,6 @@ public class JwtTokenProvider {
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUserNameFromJwt(token);
 
-        log.info("validateToken username : {}", username);
-        log.info("validateToken userDetails.getUsername : {}", userDetails.getUsername());
-        log.info("validateToken(token) : {}", validateToken(token));
         return (username.equals(userDetails.getUsername()) && validateToken(token));
     }
 

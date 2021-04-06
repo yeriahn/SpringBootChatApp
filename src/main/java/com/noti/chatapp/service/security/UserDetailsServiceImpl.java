@@ -28,7 +28,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
-        log.info("UserDetailsServiceImpl memberId : {}",memberId);
         return memberRepository.findByMemberId(memberId).map(u -> new MemberDetailsDto(u, Collections.singleton(new SimpleGrantedAuthority(Role.MEMBER.getValue())))).orElseThrow(() -> new UsernameNotFoundException(memberId));
     }
 }

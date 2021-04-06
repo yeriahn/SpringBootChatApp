@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addLogoutHandler(customLogoutHandler)               // 로그아웃 핸들러
             .and()
                 .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterAfter(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 

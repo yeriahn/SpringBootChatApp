@@ -1,5 +1,4 @@
 function checkValidation(data)  {
-    console.log("1");
     let specialCheck = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
 
     if(data == null || data === '') {

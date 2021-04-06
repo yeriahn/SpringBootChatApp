@@ -39,13 +39,9 @@ public class ChatController {
      * @return
      */
     @MessageMapping("/{roomId}/chat.callParticipants")
-    public void callParticipants(@DestinationVariable String roomId, @AuthenticationPrincipal Principal principal) {
-
-        String sender = principal.getName();
+    public void callParticipants(@DestinationVariable String roomId) {
 
         List<ChatParticipantDto> chatParticipantDtos = chatParticipantService.findByRoomId(roomId);
-
-        log.info("chatParticipantDtos :"+chatParticipantDtos.toString());
 
         simpleMessageSendingOperation.convertAndSend("/topic/chatting." + roomId, chatParticipantDtos);
     }
@@ -61,7 +57,6 @@ public class ChatController {
 
         String sender = principal.getName();
 
-        log.info("send message " + chatMessage.getRoomId() + " from" + sender);
         chatMessage.setSender(sender);
 
         chatService.sendChatMessage(chatMessage);
@@ -78,12 +73,7 @@ public class ChatController {
     public void addUser(@Payload ChatMessage chatMessage
             , SimpMessageHeaderAccessor headerAccessor, @AuthenticationPrincipal Principal principal) {
 
-        log.info("chat.newUser userDetails : {} ", principal.getName());
-
         String sender = principal.getName();
-
-        log.info("chat.newUser roomId : {} ", chatMessage.getRoomId());
-        log.info("chat.newUser memberId : {} ", sender);
 
         chatMessage.enter(sender);
 
@@ -92,10 +82,6 @@ public class ChatController {
         headerAccessor.getSessionAttributes().put("participantId", savedParticipant.getId());
         headerAccessor.getSessionAttributes().put("sender", sender);
         headerAccessor.getSessionAttributes().put("roomId", chatMessage.getRoomId());
-
-        log.info("participantId : {}", savedParticipant.getId());
-        log.info("sender : {}", sender);
-        log.info("channelTopic.getContent() : {}", chatMessage.getContent());
 
         chatService.sendChatMessage(chatMessage);
     }

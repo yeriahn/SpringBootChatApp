@@ -49,7 +49,6 @@ public class MemberController {
 
     @GetMapping("/loginMember")
     public String loginMemberForm(Principal principal) {
-        log.info("principal :"+principal);
         if(principal != null) {
             return "redirect:/chat/room";
         }
@@ -58,15 +57,6 @@ public class MemberController {
 
     @PostMapping("/loginMember/fail")
     public String loginMemberForm(HttpServletRequest request, String loginFailMsg) {
-        log.info("loginFailMsg2 : loginFailMsg");
         return "setting/member_login";
     }
-
-    /*
-    @RequestMapping(value = "/loginMember", method= {RequestMethod.GET, RequestMethod.POST})
-    public String loginMemberForm() {
-        return "setting/member_login";
-    }
-
-     */
 }

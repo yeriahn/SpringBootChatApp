@@ -36,7 +36,6 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        log.info("CustomLoginSuccessHandler ====");
         Member member = ((MemberDetailsDto)authentication.getPrincipal()).getMember();
 
         String token = jwtTokenProvider.generateJwtToken(member);
@@ -47,15 +46,10 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
         redisUtil.setDataExpire(refreshJwt, member.getMemberId(), jwtTokenProvider.REFRESH_TOKEN_VALIDATION_SECOND);
 
-        log.info("CustomLoginSuccessHandler accessToken : {}",accessToken);
-        log.info("CustomLoginSuccessHandler refreshToken : {}",refreshToken);
-
         response.addCookie(accessToken);
         response.addCookie(refreshToken);
 
-        //response.addHeader("Authorization", "Bearer " + token);
         response.sendRedirect("/chat/room");
-        //request.getRequestDispatcher("/chat/room").forward(request, response);
 
 
     }

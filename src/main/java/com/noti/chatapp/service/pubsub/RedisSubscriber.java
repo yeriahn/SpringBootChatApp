@@ -20,7 +20,6 @@ public class RedisSubscriber{
      */
     public void sendMessage(String publishMessage) {
         try {
-            log.info("여기까진 오나?");
             ChatMessage chatMessage = objectMapper.readValue(publishMessage, ChatMessage.class);
             messagingTemplate.convertAndSend("/topic/chatting." + chatMessage.getRoomId(), chatMessage);
         } catch (Exception e) {

@@ -19,7 +19,6 @@ public class CustomFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        log.info("CustomFailureHandler =====");
         String loginFailMsg = exception.getMessage();
 
         if (exception instanceof AuthenticationServiceException) {
@@ -32,12 +31,8 @@ public class CustomFailureHandler implements AuthenticationFailureHandler {
             loginFailMsg = "계정을 찾을 수 없습니다.";
         }
 
-        log.info("loginFailMsg :"+loginFailMsg);
         request.setAttribute("loginFailMsg", loginFailMsg);
 
-        // 로그인 페이지로 다시 포워딩
-        //RequestDispatcher dispatcher = request.getRequestDispatcher("/setting/loginMember?error=true");
-        //dispatcher.forward(request, response);
         request.getRequestDispatcher("/setting/loginMember/fail").forward(request, response);
     }
 }

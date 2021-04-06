@@ -61,8 +61,6 @@ public class ChatRoomService {
 
         int result = chatRoomRepository.deleteByRoomIdAndRoomPw(requestDto.getRoomId(), requestDto.getRoomPw());
 
-        log.info("deleteByRoomIdAndRoomPw result : {}",result); //성공 시 1 반환
-
         if(result == 1) {
             chatParticipantService.deleteByRoomId(requestDto.getRoomId());
         }

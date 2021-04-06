@@ -23,21 +23,6 @@ public class ChatService {
      * 채팅방에 메시지 발송
      */
     public void sendChatMessage(ChatMessage chatMessage) {
-        log.info("service - topic : {}",channelTopic.getTopic());
-        log.info("service - chatMessage : {}", chatMessage.toString());
         redisTemplate.convertAndSend(channelTopic.getTopic(), chatMessage);
     }
-
-    /**
-     * 채팅방에 메시지 발송
-     */
-    /*public void sendParticipantList(List<ChatParticipantDto> chatParticipantDto) {
-
-        log.info("chatMessage ::::" + chatParticipantDto.toString());
-        ConvertDto convertDto = new ConvertDto();
-        convertDto.setChatParticipantDto(chatParticipantDto);
-        log.info("convertDto :::"+convertDto.toString());
-
-        redisTemplate.convertAndSend(channelTopic.getTopic(), convertDto);
-    }*/
 }

@@ -13,10 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,8 +49,7 @@ public class ChatRoomController {
     public String rooms(Map<String, Object> model) {
 
         String currentMemberId = getCurrentMemberId();
-        log.info("currentMemberId : {}",currentMemberId);
-        model.put("currentMemberId", currentMemberId); //로그인을 통해 인증된 유저 정보 저장
+        model.put("currentMemberId", currentMemberId);
 
         return "/chat/room";
     }
@@ -69,7 +65,6 @@ public class ChatRoomController {
     //채팅방 id별 입장
     @GetMapping("/chat/room/detail/{roomId}")
     public String chatRoomDetail(Model model, @PathVariable String roomId) {
-        log.info("??11");
         ChatRoomDto chatRoomDto = chatRoomService.findByRoomId(roomId);
         chatRoomService.joinCount(roomId);
         String currentMemberId = getCurrentMemberId();
@@ -77,8 +72,6 @@ public class ChatRoomController {
         model.addAttribute("currentMemberId", currentMemberId);
         model.addAttribute("roomId", roomId);
         model.addAttribute("chatRoomDto", chatRoomDto);
-
-        log.info("??? : {}", chatRoomDto);
 
         return "/chat/room_detail";
     }

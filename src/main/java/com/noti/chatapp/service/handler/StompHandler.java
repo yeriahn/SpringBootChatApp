@@ -32,9 +32,6 @@ public class StompHandler implements ChannelInterceptor {
     public Message<?> preSend(final Message<?> message, final MessageChannel channel)  {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
 
-        log.info("accessor : {}",accessor);
-
-        log.info("accessor.getCommand() : {}", accessor.getCommand());
         if (accessor.getCommand() != null) {
 
             switch (accessor.getCommand()) {
@@ -62,9 +59,6 @@ public class StompHandler implements ChannelInterceptor {
                     String sender = (String) accessor.getSessionAttributes().get("sender");
                     String roomId = (String) accessor.getSessionAttributes().get("roomId");
                     Long participantId = (Long) accessor.getSessionAttributes().get("participantId");
-                    log.info("handler - sender : {}", sender);
-                    log.info("handler - roomId : {}", roomId);
-                    log.info("handler - participantId : {}", participantId);
 
                     log.debug("DISCONNECT SOCKET");
                     //퇴장 이벤트
@@ -77,17 +71,7 @@ public class StompHandler implements ChannelInterceptor {
 
                         chatParticipantService.deleteById(participantId);
                         chatService.sendChatMessage(chatMessage);
-
-                        /*long participantCnt = chatParticipantService.countByRoomId(roomId);
-                        log.info("participantCnt 수 :" +participantCnt);
-
-                        if(participantCnt == 0) {
-                            chatRoomService.deleteByRoomId(roomId);
-                        }*/
                     }
-
-
-
                     break;
                 default:
                     break;

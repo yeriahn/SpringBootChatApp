@@ -8,6 +8,7 @@ import com.noti.chatapp.util.RedisUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +26,7 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 @Component
+@Order(0)
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final UserDetailsServiceImpl userDetailsService;
@@ -38,9 +40,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         final Cookie jwtToken = cookieUtil.getCookie(httpServletRequest,jwtTokenProvider.ACCESS_TOKEN_NAME);
-
-        log.info("JwtRequestFilter jwtToken: {}",jwtToken);
-
         String username = null;
         String jwt = null;
         String refreshJwt = null;
@@ -50,18 +49,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             if(jwtToken != null){
                 jwt = jwtToken.getValue();
                 username = jwtTokenProvider.getUserNameFromJwt(jwt);
-                log.info("JwtRequestFilter jwt: {}",jwt);
-                log.info("JwtRequestFilter username: {}",username);
             }
             if(username!=null){
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 if(jwtTokenProvider.validateToken(jwt,userDetails)){
-                    log.info("유효성 통과");
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
-                    log.info("userDetails : {}",userDetails.toString());
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
-                    log.info("userDetails : {}",userDetails.toString());
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
             }
@@ -95,7 +89,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }catch(ExpiredJwtException e){
 
         }
-
         filterChain.doFilter(httpServletRequest,httpServletResponse);
     }
 }
