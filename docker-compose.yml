@@ -19,7 +19,7 @@ services:
     volumes:
       - ./database/chat/:/var/lib/mysql
 
-  spring-boot:
+  spring:
     container_name: chatapp
     build:
       context: .
