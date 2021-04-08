@@ -51,7 +51,7 @@ public class ChatRoomController {
         String currentMemberId = getCurrentMemberId();
         model.put("currentMemberId", currentMemberId);
 
-        return "/chat/room";
+        return "chat/room";
     }
 
     //채팅방 입장 화면
@@ -73,7 +73,7 @@ public class ChatRoomController {
         model.addAttribute("roomId", roomId);
         model.addAttribute("chatRoomDto", chatRoomDto);
 
-        return "/chat/room_detail";
+        return "chat/room_detail";
     }
 
     /**
@@ -138,12 +138,12 @@ public class ChatRoomController {
     //채팅방 입장 화면
     @GetMapping("/error/room_failed")
     public String roomFailed() {
-        return "/error/room_failed";
+        return "error/room_failed";
     }
 
     //채팅방 입장 화면
     @GetMapping("/error/participant_join_failed")
     public String participantJoinFailed() {
-        return "/error/participant_join_failed";
+        return "error/participant_join_failed";
     }
 }
