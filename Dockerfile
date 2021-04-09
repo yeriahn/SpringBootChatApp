@@ -6,6 +6,6 @@ MAINTAINER Ahn Yeri <dpfl1090@naver.com>
 
 COPY build/libs/demo-*.jar app.jar
 
-EXPOSE 8082
+EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
