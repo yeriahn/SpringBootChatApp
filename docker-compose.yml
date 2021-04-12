@@ -25,11 +25,11 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      MYSQL_URL: jdbc:mysql://mysql:3306/chat?allowPublicKeyRetrieval=true&useSSL=false
+      MYSQL_URL: jdbc:mysql://mysql:3306/chat?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf8
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
     ports:
-    - 8082:8082
+    - 8080:8080
     restart: always
     depends_on:
       - mysql
