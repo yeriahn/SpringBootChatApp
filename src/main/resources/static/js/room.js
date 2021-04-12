@@ -2,8 +2,6 @@ const Room = (function () {
 
     let page = 0;
     let size = 10;
-    var chatrooms = new Array();
-
 
     // TODO: Overlay
     getListRenderAll();
@@ -57,9 +55,10 @@ const Room = (function () {
 
         $('#room-category').find('option:first').attr('selected', 'selected');
         $('#room-name').val('');
+        $('#room-pw').val('');
+
         modal.style.display = "none";
 
-        //location.href="/chat/room/detail/"+roomId;
     };
     return {
         getListRenderAll: getListRenderAll,

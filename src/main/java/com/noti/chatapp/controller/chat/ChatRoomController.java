@@ -5,7 +5,6 @@ import com.noti.chatapp.dto.PageDto;
 import com.noti.chatapp.dto.chat.ChatRoomDto;
 import com.noti.chatapp.dto.LoginDto;
 import com.noti.chatapp.service.ChatRoomService;
-import com.noti.chatapp.config.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -42,6 +41,11 @@ public class ChatRoomController {
         }
 
         return username;
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/chat/room";
     }
 
     //채팅 리스트 화면

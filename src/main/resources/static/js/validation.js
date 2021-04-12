@@ -17,3 +17,14 @@ function checkValidation(data)  {
         return 'exit'
     }
 }
+
+function checkRoomValidation(data)  {
+    if(data == null || data == '') {
+        swal({
+            title: 'Fail', /*상단 타이틀*/
+            text: '채팅 내용을 입력해주세요.', /*내용*/
+            icon: 'error' /*아이콘 타입*/,
+        });
+        return 'exit'
+    }
+}

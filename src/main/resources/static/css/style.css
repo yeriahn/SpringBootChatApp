@@ -84,7 +84,7 @@ body {
 }
 
 .sections-top {
-    height: 75vh;
+    height: 80%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -92,15 +92,14 @@ body {
 }
 
 .delete-prepend {
-    width: 1200px;
     margin-top: 10px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
 }
 
 .chat-section {
-    height: 550px;
+    height: 100%;
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -111,7 +110,7 @@ body {
 .participant-section {
     border-left: var(--border-size) solid var(--color-light-grey);
     background-color: white;
-    height: 550px;
+    height: 100%;
     width: 10%;
 }
 
@@ -119,12 +118,6 @@ body {
     width: var(--base-hundred);
     height: var(--base-hundred);
     padding-bottom: var(--base-space);
-    cursor: pointer;
-    transition: transform var(--animation-duration) ease;
-}
-
-.logo:hover {
-    transform: scale(1.1);
 }
 
 .btn {
@@ -136,8 +129,7 @@ body {
     margin-right: var(--base-space);
 }
 
-.btn:hover,
-.logo:hover {
+.btn:hover {
     transform: scale(1.1);
 }
 
@@ -223,8 +215,8 @@ body {
 }
 
 .listTop {
-    height: 8%;
-    background-color: var(--color-ivory-color);
+    height: 6%;
+    background-color: #b5b9ff;
     display: flex;
     flex-direction: row;
     justify-content : flex-end;
@@ -233,7 +225,7 @@ body {
 }
 
 .panel-heading {
-    background-color: var(--color-ivory-color);
+    background-color: #b5b9ff;
     height: 14%;
     display: flex;
     justify-content : center;
@@ -271,7 +263,8 @@ body {
 }
 
 .listRoomName {
-    height: 8%;
+    background-color: var(--color-ivory-color);
+    height: 10%;
     display: flex;
     justify-content : center;
     align-items: center;

@@ -17,15 +17,23 @@
             stompClient.connect({}, connectionSuccess, connectionClose);
         })
 
+        $("#btn-input").on('keydown', function(event) {
+            if (event.keyCode == 13){
+                if (!event.shiftKey){
+                    let roomText = document.getElementById('btn-input').value;
+                    if(checkRoomValidation(roomText) == 'exit') return;
 
-
-		$("#btn-input").keyup(function(event) {
-			if (event.keyCode == "13") {
-				sendMessage(event);
-			}
-		});
+                    sendMessage(event);
+                }
+            }
+        });
 
 		$("#btn-chat").click(function(event) {
+
+            let roomText = document.getElementById('btn-input').value;
+
+            if(checkRoomValidation(roomText) == 'exit') return;
+
 			sendMessage(event);
 		});
 
