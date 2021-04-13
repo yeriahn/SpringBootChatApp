@@ -12,10 +12,15 @@
 <section class="sections-top">
     <div class="chat-section">
         <div class="lists">
-            <div class="listTop">
-                <div class="listOut">
-                    <button id="btnOut" class="btn userOutBtn" onclick="Room.createRoom();">
-                        <img src="/img/out.png" class="iconOut"/>
+            <div class="list-top">
+                <div class="delete-prepend" th:if="${chatRoomDto.getCreateName().equals(currentMemberId)}">
+                    <button id="delete-open" class="btn user-out-btn" data-key="color">
+                        <img src="/img/trash.png" class="icon-out" alt="채팅방 삭제" title="채팅방 삭제"/>
+                    </button>
+                </div>
+                <div class="list-out">
+                    <button id="btn-out" class="btn user-out-btn" onclick="Room.createRoom();">
+                        <img src="/img/out.png" class="icon-out" alt="채팅방 나가기" title="채팅방 나가기"/>
                     </button>
                 </div>
             </div>
@@ -54,11 +59,11 @@
         </div>
     </div>
 </section>
-<div class="delete-prepend" th:if="${chatRoomDto.getCreateName().equals(currentMemberId)}">
+<!--<div class="delete-prepend" th:if="${chatRoomDto.getCreateName().equals(currentMemberId)}">
     <button id="delete-open" class="btn colorBtn" data-key="color">
         채팅방 삭제
     </button>
-</div>
+</div>-->
 
 <!--modal-->
 <div class="delete-modal-wrapper" style="display: none;">

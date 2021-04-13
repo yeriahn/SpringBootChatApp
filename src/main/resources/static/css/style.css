@@ -57,14 +57,36 @@ body {
 }
 
 .headers {
-    height: 10vh;
+    height: 8%;
 }
 
 .in-headers {
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--color-white);
+}
+
+.header-user {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-purple);
+}
+
+.header-logout {
+    margin-right: 10px;
+}
+
+.icon-logout {
+    width: 40px;
+    height: 40px;
+}
+
+.icon-out {
+    width: 18px;
+    height: 16px;
 }
 
 .sections {
@@ -84,6 +106,7 @@ body {
 }
 
 .sections-top {
+    margin-top: 20px;
     height: 80%;
     display: flex;
     flex-direction: row;
@@ -92,7 +115,6 @@ body {
 }
 
 .delete-prepend {
-    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -214,7 +236,7 @@ body {
     height: 100%;
 }
 
-.listTop {
+.list-top {
     height: 6%;
     background-color: #b5b9ff;
     display: flex;
@@ -252,14 +274,9 @@ body {
     padding-right: 0px;
 }
 
-.userOutBtn {
+.user-out-btn {
     width: 33px;
     height: 100%;
-}
-
-.iconOut {
-    width: 18px;
-    height: 16px;
 }
 
 .listRoomName {
@@ -443,4 +460,11 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.message-content  {
+    font-size: 14px;
+    font-weight: lighter;
+    line-height:25px;
+    font-family: 돋음, Dotum, Baekmuk Dotum, Undotum, Apple Gothic, Latin font, sans-serif;
 }

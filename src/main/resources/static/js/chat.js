@@ -18,13 +18,11 @@
         })
 
         $("#btn-input").on('keydown', function(event) {
-            if (event.keyCode == 13){
-                if (!event.shiftKey){
-                    let roomText = document.getElementById('btn-input').value;
-                    if(checkRoomValidation(roomText) == 'exit') return;
 
-                    sendMessage(event);
-                }
+            if (event.keyCode == 13 && !event.shiftKey)
+            {
+                sendMessage(event);
+
             }
         });
 
@@ -37,7 +35,7 @@
 			sendMessage(event);
 		});
 
-        $("#btnOut").click(function(event) {
+        $("#btn-out").click(function(event) {
             outRoom(event);
         });
 	});
@@ -132,7 +130,9 @@
         let glyphiconTime = $(document.createElement("span")).attr({
 			"class" : "glyphicon glyphicon-time"
 		});
-        let content = $(document.createElement("p")).text(message);
+        let content = $(document.createElement("pre")).attr({
+            "class" : "message-content"
+        }).text(message);
 
 
 		userName = userName ? userName : noti.chatapp.dto.ChatMessage.memberId;
