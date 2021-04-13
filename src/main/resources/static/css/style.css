@@ -106,8 +106,9 @@ body {
 }
 
 .sections-top {
-    margin-top: 20px;
-    height: 80%;
+    margin-top: 30px;
+    padding-bottom: 30px;
+    height: 700px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -289,7 +290,7 @@ body {
 }
 
 .listMessageGroup {
-    height: 380px;
+    height: 500px;
     overflow-y: auto;
 }
 
