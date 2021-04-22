@@ -13,3 +13,9 @@
 ## 시스템 구성 # 2
 
 ![시스템 구성도2](https://user-images.githubusercontent.com/46776745/115690930-8532fd80-a398-11eb-86b7-30b91f6a1942.PNG)
+
+ **OS** : AWS의 Ubuntu 18.04 LTS
+ **language** : openjdk 15
+ **Server Framework** : Spring Boot framework
+ **Socket module** : Socket.io
+ **DataBase** : MySQL, Redis
