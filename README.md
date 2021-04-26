@@ -1,6 +1,6 @@
 # 웹 소켓을 이용한 채팅 애플리케이션
 
-로그인을 하고 인증된 사용자만 채팅방에 입장하여 채팅이 가능한 서비스입니다.
+로그인을 하고 인증된 사용자만 특정 채팅방에 입장하여 채팅이 가능한 서비스입니다.
 
 채팅 서비스를 만들어보고 싶었고, 제가 원하는 기능을 추가해보고자 개인으로 제작하게 되었습니다.
 
@@ -30,7 +30,6 @@
 | 회원가입 | POST | /setting/regMember |
 | 로그인 렌더링| GET | /setting/loginMember |
 | 로그인 | POST | /loginProc |
-| 로그인 실패 | POST | /setting/loginMember/fail |
 
 ### 02) 채팅방 API
 
@@ -42,8 +41,6 @@
 | 전체 채팅방 목록 호출 | GET | /api/chat/chat-room |
 | 특정 채팅방 생성 | POST | /api/chat/chat-room |
 | 특정 채팅방 삭제 | DELETE | /api/chat/delete-room |
-| 특정 채팅방 접근 실패 | GET | /error/room_failed |
-| 특정 채팅방 참여 인원수 제한으로 인한 접근 실패 | GET | /error/participant_join_failed |
 
 ### 03) 채팅 API
 
