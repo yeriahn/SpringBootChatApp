@@ -52,3 +52,36 @@
 | 특정 채팅방 참여자 목록 호출 | MESSAGE | /:roomId/chat.callParticipants |
 | 특정 채팅방 메시지 전송 | MESSAGE | /:roomId/chat.sendMessage |
 | 특정 채팅방 유저 입장 알림 | MESSAGE | /:roomId/chat.newUser |
+
+
+## 03. 프로젝트 실행
+
+1. application.yml 설정
+
+src > main > resources > application.yml에 현존하는 설정을 아래와 같은 방식으로 작성해서 이용하시면 됩니다.
+
+```{.no-highlight}
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://[호스트 입력. localhost는 127.0.0.1입니다.]:[포트 번호 입력. 기본 포트는 3306입니다.]/[데이터베이스명 입력]?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: [사용자 이름 입력]
+    password: [비밀번호 입력]
+  redis:
+    host: [호스트 입력. localhost는 127.0.0.1입니다.]
+    port: [포트 번호 입력. 기본 포트는 6379입니다.]
+```
+
+2. Docker 설치
+
+3. 프로젝트 실행
+
+docker-compose.yml 파일에는 다음이 포함됩니다.
+* Redis
+* MySQL
+* SpringBoot Project (SpringBootChatApp)
+
+docker-compose.yml 파일이 존재하는 위치에서 다음 명령을 실행합니다.
+```{.no-highlight}
+[SpringBootChatApp folder]> docker-compose up
+```
