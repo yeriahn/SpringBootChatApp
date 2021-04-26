@@ -56,7 +56,7 @@
 
 ## 03. 프로젝트 실행
 
-### 01). application.yml 설정
+### 01) application.yml 설정
 
 src > main > resources > application.yml에 현존하는 설정을 아래와 같은 방식으로 작성해서 이용하시면 됩니다.
 
@@ -72,9 +72,9 @@ spring:
     port: [포트 번호 입력. 기본 포트는 6379입니다.]
 ```
 
-### 02). Docker 설치
+### 02) Docker 설치
 
-### 03). 프로젝트 실행
+### 03) 프로젝트 실행
 
 docker-compose.yml 파일에는 다음이 포함됩니다.
 * Redis
